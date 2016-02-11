@@ -1,0 +1,6 @@
+C:\Work\HomeProjects\CompetitionSimulation\CompetitionSimulation\bin\Debug\CompetitionSimulation.exe.config
+C:\Work\HomeProjects\CompetitionSimulation\CompetitionSimulation\bin\Debug\CompetitionSimulation.exe
+C:\Work\HomeProjects\CompetitionSimulation\CompetitionSimulation\bin\Debug\CompetitionSimulation.pdb
+C:\Work\HomeProjects\CompetitionSimulation\CompetitionSimulation\obj\Debug\CompetitionSimulation.csprojResolveAssemblyReference.cache
+C:\Work\HomeProjects\CompetitionSimulation\CompetitionSimulation\obj\Debug\CompetitionSimulation.exe
+C:\Work\HomeProjects\CompetitionSimulation\CompetitionSimulation\obj\Debug\CompetitionSimulation.pdb
