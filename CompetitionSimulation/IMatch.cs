@@ -2,9 +2,9 @@
 {
 	internal interface IMatch
 	{
-		string GetHomeTeam();
+		ITeam GetHomeTeam();
 
-		string GetForeignTeam();
+		ITeam GetForeignTeam();
 
 		MatchState GetMasMatchState();
 	}

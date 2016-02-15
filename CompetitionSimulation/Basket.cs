@@ -7,17 +7,17 @@
 	{
 		private readonly string Name;
 		private readonly int Order;
-		private readonly Dictionary<int, Team> BasketInnitial;
+		private readonly IDictionary<int, ITeam> BasketInnitial;
 
-		private readonly SortedList<int, Match> Matches;
-		private readonly Dictionary<int, Team> BasketResult;
+		private readonly IDictionary<int, IMatch> Matches;
+		private readonly IDictionary<int, ITeam> BasketResult;
 
 		internal Basket(
 			string name,
 			int order,
-			Dictionary<int, Team> basketInnitial,
-			Func<Dictionary<int, Team>, SortedList<int, Match>> basketMatchSystem,
-			Func<Dictionary<int, Team>, SortedList<int, Match>, Dictionary<int, Team>>  getBasketResult
+			IDictionary<int, ITeam> basketInnitial,
+			Func<IDictionary<int, ITeam>, IDictionary<int, IMatch>> basketMatchSystem,
+			Func<IDictionary<int, ITeam>, IDictionary<int, IMatch>, IDictionary<int, ITeam>>  getBasketResult
 			)
 		{
 			this.Name = name;
@@ -38,12 +38,12 @@
 			return this.Name;
 		}
 
-		public Dictionary<int, Team> GetBasketResult()
+		public IDictionary<int, ITeam> GetBasketResult()
 		{
 			return this.BasketResult;
 		}
 
-		public SortedList<int, Match> GetBasketeMatches()
+		public IDictionary<int, IMatch> GetBasketeMatches()
 		{
 			return this.Matches;
 		}

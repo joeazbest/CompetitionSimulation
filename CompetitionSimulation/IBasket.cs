@@ -8,9 +8,9 @@ namespace CompetitionSimulation
 
 		string GetName();
 
-		Dictionary<int, Team> GetBasketResult();
+		IDictionary<int, ITeam> GetBasketResult();
 
-		SortedList<int, Match> GetBasketeMatches();
+		IDictionary<int, IMatch> GetBasketeMatches();
 
 		int GetTeamCount();
 	}

@@ -3,14 +3,14 @@
 	internal class Match : IMatch
 	{
 		// TODO skore mozna
-		private readonly string HomeTeam;
+		private readonly ITeam HomeTeam;
 
-		private readonly string ForeignTeam;
+		private readonly ITeam ForeignTeam;
 		private readonly MatchState State;
 
 		internal Match(
-			string homeTeam,
-			string foreignTeam,
+			ITeam homeTeam,
+			ITeam foreignTeam,
 			MatchState state
 			)
 		{
@@ -19,12 +19,12 @@
 			this.State = state;
 		}
 
-		public string GetHomeTeam()
+		public ITeam GetHomeTeam()
 		{
 			return this.HomeTeam;
 		}
 
-		public string GetForeignTeam()
+		public ITeam GetForeignTeam()
 		{
 			return this.ForeignTeam;
 		}
