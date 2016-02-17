@@ -15,8 +15,9 @@
 		internal Basket(
 			string name,
 			int order,
+			int round,
 			IDictionary<int, ITeam> basketInnitial,
-			Func<IDictionary<int, ITeam>, IDictionary<int, IMatch>> basketMatchSystem,
+			Func<IDictionary<int, ITeam>, int, IDictionary<int, IMatch>> basketMatchSystem,
 			Func<IDictionary<int, ITeam>, IDictionary<int, IMatch>, IDictionary<int, ITeam>>  getBasketResult
 			)
 		{
@@ -24,7 +25,7 @@
 			this.Order = order;
 			this.BasketInnitial = basketInnitial;
 
-			this.Matches = basketMatchSystem(basketInnitial);
+			this.Matches = basketMatchSystem(basketInnitial, round);
 			this.BasketResult = getBasketResult(this.BasketInnitial, this.Matches);
 		}
 

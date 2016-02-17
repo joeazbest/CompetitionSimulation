@@ -4,10 +4,16 @@
 
 	internal interface IAlgorithm
 	{
-		IList<IBasket> CreateInitialBastet(IList<ITeam> teams);
+		IList<IBasket> CreateInitialBasket(IList<ITeam> teams);
 
-		IDictionary<int, IMatch> ComputeMatches(IDictionary<int, ITeam> teams);
+		IDictionary<int, IMatch> ComputeBasketMatches(
+			IDictionary<int, ITeam> oneBasket,
+			int round
+		);
 
-		IDictionary<int, ITeam> ComputeTeamOrder(IDictionary<int, ITeam> teams, IDictionary<int, IMatch> matches);
+		IDictionary<int, ITeam> ComputeBasketTeamOrder(
+			IDictionary<int, ITeam> oneBasket,
+			IDictionary<int, IMatch> basketMatches
+		);
 	}
 }

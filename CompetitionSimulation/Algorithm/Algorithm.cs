@@ -4,17 +4,18 @@
 
 	internal abstract class Algorithm : IAlgorithm
 	{
-		public abstract IList<IBasket> CreateInitialBastet(
+		public abstract IList<IBasket> CreateInitialBasket(
 			IList<ITeam> teams
 		);
 
-		public abstract IDictionary<int, IMatch> ComputeMatches(
-			IDictionary<int, ITeam> teams
+		public abstract IDictionary<int, IMatch> ComputeBasketMatches(
+			IDictionary<int, ITeam> oneBasket,
+			int round
 		);
 
-		public abstract IDictionary<int, ITeam> ComputeTeamOrder(
-			IDictionary<int, ITeam> teams,
-			IDictionary<int, IMatch> matches
+		public abstract IDictionary<int, ITeam> ComputeBasketTeamOrder(
+			IDictionary<int, ITeam> oneBasket,
+			IDictionary<int, IMatch> basketMatches
 		);
 	}
 }

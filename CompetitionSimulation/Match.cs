@@ -12,7 +12,7 @@
 			ITeam homeTeam,
 			ITeam foreignTeam,
 			MatchState state
-			)
+		)
 		{
 			this.HomeTeam = homeTeam;
 			this.ForeignTeam = foreignTeam;
