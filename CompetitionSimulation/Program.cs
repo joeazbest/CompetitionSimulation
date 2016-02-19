@@ -2,6 +2,7 @@
 {
 	using CompetitionSimulation.Algorithm;
 	using System.Collections.Generic;
+	using System.Data.SqlTypes;
 
 	internal class Program
 	{
@@ -19,9 +20,20 @@
 			var alg = new PrimitiveAlgorithm();
 
 			// prvotni rozzareni do skupin
-			var InnitialBasket = alg.CreateInitialBasket(teams);
+			var innitialBasket = alg.CreateInitialBasket(teams);
+
+			var rounds = new Dictionary<int, Round>();
+			rounds.Add(1, new Round(1, innitialBasket));
 
 			// provadeni jednotlivych kol
+			for (var roundOrder = 2; roundOrder <= roundCount; roundOrder++)
+			{
+				var previousRoundResult = rounds[roundOrder - 1].GetRoundResult();
+
+				alg.
+
+			}
+
 		}
 
 		private static IList<IBasket> CreateInnitionalBasket(
