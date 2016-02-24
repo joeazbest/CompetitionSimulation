@@ -2,7 +2,6 @@
 {
 	using CompetitionSimulation.Algorithm;
 	using System.Collections.Generic;
-	using System.Data.SqlTypes;
 
 	internal class Program
 	{
@@ -30,10 +29,8 @@
 			{
 				var previousRoundResult = rounds[roundOrder - 1].GetRoundResult();
 
-				alg.
-
+				rounds.Add(roundOrder, new Round(roundOrder, alg.CreateRoundBasket(previousRoundResult)));
 			}
-
 		}
 
 		private static IList<IBasket> CreateInnitionalBasket(

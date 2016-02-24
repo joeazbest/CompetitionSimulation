@@ -46,6 +46,11 @@
 			return output;
 		}
 
+		internal IList<IBasket> CreateRoundBasket(IDictionary<int, ITeam> previousRoundResult)
+		{
+			throw new NotImplementedException();
+		}
+
 		//public override IDictionary<int, IMatch> ComputeBasketMatches(
 		//	IDictionary<int, ITeam> oneBasket,
 		//	int round
