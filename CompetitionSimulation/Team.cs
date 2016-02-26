@@ -2,12 +2,12 @@
 {
 	using System;
 
-	internal class Team : ITeam
+	public class Team : ITeam
 	{
 		private readonly string Name;
 		private readonly Func<decimal, decimal> PowerComputer;
 
-		internal Team(string name, Func<decimal, decimal> powerComputer)
+		public Team(string name, Func<decimal, decimal> powerComputer)
 		{
 			this.Name = name;
 			this.PowerComputer = powerComputer;

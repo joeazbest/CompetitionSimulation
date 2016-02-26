@@ -3,7 +3,7 @@ namespace CompetitionSimulation
 	using System.Collections.Generic;
 	using System.Linq;
 
-	internal class Round : IRound
+	public class Round : IRound
 	{
 		private readonly int Order;
 		private readonly IList<IBasket> Baskets;

@@ -1,11 +1,17 @@
 ﻿namespace CompetitionSimulation
 {
-	internal interface IMatch
+	public interface IMatch
 	{
-		ITeam GetHomeTeam();
+		int HomeScore { get; }
+		int ForeignScore { get; }
 
-		ITeam GetForeignTeam();
+		ITeam HomeTeam { get; }
+		ITeam ForeignTeam { get; }
 
-		MatchState GetMasMatchState();
+		int HomePoint { get; }
+		int ForeignPoint { get; }
+
+
+		MatchState GetMatchState();
 	}
 }

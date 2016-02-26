@@ -3,10 +3,10 @@
 	using CompetitionSimulation.Algorithm;
 	using System.Collections.Generic;
 
-	internal class Program
+	public class Program
 	{
 		// TODO - poradatelstvi
-		private static void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			var roundCount = 6;
 			// nacteni seznamu tymu - vim seznam typu a vim jejich funkci, kterea urcuje jejich silu v prubehu casovych useku (kola)

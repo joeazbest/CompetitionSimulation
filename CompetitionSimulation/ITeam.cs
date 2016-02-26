@@ -1,6 +1,6 @@
 ﻿namespace CompetitionSimulation
 {
-	internal interface ITeam
+	public interface ITeam
 	{
 		decimal GetCurrentPower(int round);
 		string GetName();

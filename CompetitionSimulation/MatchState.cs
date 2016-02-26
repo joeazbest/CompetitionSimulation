@@ -1,6 +1,6 @@
 ﻿namespace CompetitionSimulation
 {
-	internal enum MatchState
+	public enum MatchState
 	{
 		HomeWin = 1,
 		Split = 0,

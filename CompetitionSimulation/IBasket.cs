@@ -2,7 +2,7 @@ namespace CompetitionSimulation
 {
 	using System.Collections.Generic;
 
-	internal interface IBasket
+	public interface IBasket
 	{
 		int GetOrder();
 
@@ -10,7 +10,7 @@ namespace CompetitionSimulation
 
 		IDictionary<int, ITeam> GetBasketResult();
 
-		IDictionary<int, IMatch> GetBasketeMatches();
+		IEnumerable<IMatch> GetBasketeMatches();
 
 		int GetTeamCount();
 	}

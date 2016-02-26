@@ -1,18 +1,18 @@
 ﻿namespace CompetitionSimulation
 {
-	using System;
+	using CompetitionTable;
 	using System.Collections.Generic;
 
-	internal class Basket : IBasket
+	public class Basket : IBasket
 	{
 		private readonly string Name;
 		private readonly int Order;
 		private readonly IDictionary<int, ITeam> BasketInnitial;
 
-		private readonly IDictionary<int, IMatch> Matches;
+		private readonly IEnumerable<IMatch> Matches;
 		private readonly IDictionary<int, ITeam> BasketResult;
 
-		internal Basket(
+		public Basket(
 			string name,
 			int order,
 			int round,
@@ -40,7 +40,7 @@
 			return this.Name;
 		}
 
-		public IDictionary<int, IMatch> GetBasketeMatches()
+		public IEnumerable<IMatch> GetBasketeMatches()
 		{
 			return this.Matches;
 		}
@@ -53,32 +53,6 @@
 		public int GetTeamCount()
 		{
 			return this.BasketInnitial.Count;
-		}
-	}
-
-	internal interface ICompetitionTable
-	{
-		IDictionary<int, IMatch> GetMatches();
-
-		IDictionary<int, ITeam> GetTableResult();
-	}
-
-	internal class CompetitionSixTable : ICompetitionTable
-	{
-		internal CompetitionSixTable(
-			IDictionary<int, ITeam> inputTeamOrder
-		)
-		{
-		}
-
-		public IDictionary<int, IMatch> GetMatches()
-		{
-			throw new NotImplementedException();
-		}
-
-		public IDictionary<int, ITeam> GetTableResult()
-		{
-			throw new NotImplementedException();
 		}
 	}
 }

@@ -2,7 +2,7 @@
 {
 	using System.Collections.Generic;
 
-	internal interface IAlgorithm
+	public interface IAlgorithm
 	{
 		IList<IBasket> CreateInitialBasket(IList<ITeam> teams);
 

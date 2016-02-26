@@ -1,10 +1,12 @@
 ﻿namespace CompetitionSimulation.Algorithm
 {
+	using CompetitionTable;
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
+	using System.Linq;
 
-	internal class PrimitiveAlgorithm : Algorithm
+	public class PrimitiveAlgorithm : Algorithm
 	{
 		public override IList<IBasket> CreateInitialBasket(
 			IList<ITeam> teams
@@ -36,8 +38,8 @@
 						i,
 						1,
 						teamOrder,
-						new CompetitionSixTable(	// TODO tohle volim
-							teamOrder
+						new CompetitionTable(	// TODO tohle volim
+							teamOrder.Select(t => t.Value)
 						)
 					)
 				);
@@ -46,7 +48,7 @@
 			return output;
 		}
 
-		internal IList<IBasket> CreateRoundBasket(IDictionary<int, ITeam> previousRoundResult)
+		public IList<IBasket> CreateRoundBasket(IDictionary<int, ITeam> previousRoundResult)
 		{
 			throw new NotImplementedException();
 		}

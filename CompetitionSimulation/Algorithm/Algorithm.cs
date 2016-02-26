@@ -2,7 +2,7 @@
 {
 	using System.Collections.Generic;
 
-	internal abstract class Algorithm : IAlgorithm
+	public abstract class Algorithm : IAlgorithm
 	{
 		public abstract IList<IBasket> CreateInitialBasket(
 			IList<ITeam> teams

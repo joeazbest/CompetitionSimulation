@@ -2,7 +2,7 @@
 {
 	using System.Collections.Generic;
 
-	internal interface IRound
+	public interface IRound
 	{
 		IDictionary<int, ITeam> GetRoundResult();
 
