@@ -62,12 +62,22 @@
 		*/
 		public IDictionary<int, ITeam> GetTableResult()
 		{
+			var pointOrder = this.results.GroupBy(t => t.Value.Points).ToDictionary(t => t.Key, t => t.Select(r => r.Key).ToList());
+
 			var output = new Dictionary<int, ITeam>();
 
 			var order = 1;
-			foreach(var team in this.results.OrderByDescending(t => t.Value.Points))
+			foreach (var teamList in pointOrder.OrderByDescending(t => t.Key))
 			{
-				output.Add(order++, team.Key);
+				// existuje pouze jeden team s danymi body
+				if (teamList.Value.Count() == 1)
+				{
+					output.Add(order++, teamList.Value.Single());
+				}
+				else	// nastupuji dalsi kriteria
+				{
+
+				}
 			}
 
 			return output;
