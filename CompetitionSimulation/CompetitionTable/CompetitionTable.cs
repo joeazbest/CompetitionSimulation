@@ -39,6 +39,9 @@
 
 		public void AddMatches(IEnumerable<IMatch> matchesAdd)
 		{
+			if (matchesAdd == null)
+				throw new ArgumentNullException(nameof(matchesAdd));
+
 			this.matches.AddRange(matchesAdd);
 			foreach (var match in matchesAdd)
 			{
@@ -60,46 +63,94 @@
 		* -> vyšší počet celkových vstřelených branek
 		* -> los
 		*/
+
 		public IDictionary<int, ITeam> GetTableResult()
 		{
-			var pointOrder = this.results.GroupBy(t => t.Value.Points).ToDictionary(t => t.Key, t => t.Select(r => r.Key).ToList());
-
 			var output = new Dictionary<int, ITeam>();
 
 			var order = 1;
-			foreach (var teamList in pointOrder.OrderByDescending(t => t.Key))
+			foreach (var teamList in GetTeamPointOrder().OrderByDescending(t => t.Key))
 			{
 				// existuje pouze jeden team s danymi body
-				if (teamList.Value.Count() == 1)
+				if (teamList.Value.Count == 1)
 				{
 					output.Add(order++, teamList.Value.Single());
 				}
-				else	// nastupuji dalsi kriteria
+				else    // nastupuji dalsi kriteria
 				{
 					// tabulka vzajemnych zapasu
 					var miniTable = new CompetitionTable(teamList.Value);
 					miniTable.AddMatches(this.matches.Where(t => teamList.Value.Contains(t.HomeTeam) && teamList.Value.Contains(t.ForeignTeam)));
 
-					var miniTableOrder = miniTable.results.GroupBy(t => t.Value.Points).ToDictionary(t => t.Key, t => t.Select(r => r.Key).ToList());
-
-					foreach(var miniTeamList in miniTableOrder.OrderByDescending(t => t.Key))
+					foreach (var miniTeamList in miniTable.GetTeamPointOrder().OrderByDescending(t => t.Key))
 					{
-						if(miniTeamList.Value.Count() == 1)
+						if (miniTeamList.Value.Count == 1)
 						{
 							output.Add(order++, miniTeamList.Value.Single());
 						}
 						else
 						{
-							// vyssi pocet vstrelenych branek
-							
-							// TODO tohle me ted nebavi a chce to vymyslit hezky, takle to bude strasne ifu
+							// vyssi pocet vstrelenych braek v minitabulce
+							foreach (var scoreMiniTableTeam in miniTable.GetTeamShootGoalsOrder(miniTeamList.Value).OrderByDescending(t => t.Key))
+							{
+								if (scoreMiniTableTeam.Value.Count() == 1)
+								{
+									output.Add(order++, scoreMiniTableTeam.Value.Single());
+								}
+								else
+								{
+									// kladnejsi celkovej rozdil
+									foreach (
+										var diffTotalScore in this.GetTeamScoreDiffOrder(scoreMiniTableTeam.Value).OrderByDescending(t => t.Key))
+									{
+										if (diffTotalScore.Value.Count() == 1)
+										{
+											output.Add(order++, diffTotalScore.Value.Single());
+										}
+										else
+										{
+											foreach (var scoreTotal in this.GetTeamShootGoalsOrder(diffTotalScore.Value).OrderByDescending(t => t.Key))
+											{
+												if (scoreTotal.Value.Count() == 1)
+												{
+													output.Add(order++, scoreTotal.Value.Single());
+												}
+												else
+												{
+													// TODO rnd
+													foreach (var xxxTeam in scoreTotal.Value)
+													{
+														output.Add(order++, xxxTeam);
+													}
+												}
+											}
+										}
+									}
+								}
+							}
 						}
 					}
-
 				}
 			}
 
 			return output;
+		}
+
+		internal Dictionary<int, List<ITeam>> GetTeamPointOrder()
+		{
+			return this.results.GroupBy(t => t.Value.Points).ToDictionary(t => t.Key, t => t.Select(r => r.Key).ToList());
+		}
+
+		internal IDictionary<int, IEnumerable<ITeam>> GetTeamShootGoalsOrder(
+			IEnumerable<ITeam> filterTeam
+		)
+		{
+			throw new NotImplementedException();
+		}
+
+		internal IDictionary<int, IEnumerable<ITeam>> GetTeamScoreDiffOrder(IEnumerable<ITeam> filterTeam)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }
