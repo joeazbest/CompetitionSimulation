@@ -21,7 +21,7 @@
 
 			this.teams = inputTeam;
 			this.results = new Dictionary<ITeam, TeamResult>();
-			foreach(var team in this.teams)
+			foreach (var team in this.teams)
 			{
 				this.results.Add(
 					team,
@@ -40,7 +40,7 @@
 		public void AddMatches(IEnumerable<IMatch> matchesAdd)
 		{
 			this.matches.AddRange(matchesAdd);
-			foreach(var match in matchesAdd)
+			foreach (var match in matchesAdd)
 			{
 				this.results[match.HomeTeam].AddMatch(match, match.HomeTeam);
 				this.results[match.ForeignTeam].AddMatch(match, match.ForeignTeam);
@@ -76,7 +76,25 @@
 				}
 				else	// nastupuji dalsi kriteria
 				{
+					// tabulka vzajemnych zapasu
 					var miniTable = new CompetitionTable(teamList.Value);
+					miniTable.AddMatches(this.matches.Where(t => teamList.Value.Contains(t.HomeTeam) && teamList.Value.Contains(t.ForeignTeam)));
+
+					var miniTableOrder = miniTable.results.GroupBy(t => t.Value.Points).ToDictionary(t => t.Key, t => t.Select(r => r.Key).ToList());
+
+					foreach(var miniTeamList in miniTableOrder.OrderByDescending(t => t.Key))
+					{
+						if(miniTeamList.Value.Count() == 1)
+						{
+							output.Add(order++, miniTeamList.Value.Single());
+						}
+						else
+						{
+							// vyssi pocet vstrelenych branek
+							
+							// TODO tohle me ted nebavi a chce to vymyslit hezky, takle to bude strasne ifu
+						}
+					}
 
 				}
 			}
