@@ -1,57 +1,32 @@
-﻿using System;
-
-namespace CompetitionSimulation
+﻿namespace CompetitionSimulation
 {
+	using System;
+
 	public class Match : IMatch
 	{
-		private readonly ITeam homeTeam;
-		private readonly ITeam foreignTeam;
+		public int HomeScore { get; }
 
-		private readonly int homeScore;
-		private readonly int foreignScore;
+		public int ForeignScore { get; }
 
-		public int HomeScore
-		{
-			get
-			{
-				return this.homeScore;
-			}
-		}
+		public ITeam HomeTeam { get; }
 
-		public int ForeignScore
-		{
-			get
-			{
-				return this.foreignScore;
-			}
-		}
-
-		public ITeam HomeTeam
-		{
-			get
-			{
-				return this.homeTeam;
-			}
-		}
-
-		public ITeam ForeignTeam
-		{
-			get
-			{
-				return this.foreignTeam;
-			}
-		}
+		public ITeam ForeignTeam { get; }
 
 		public int HomePoint
 		{
 			get
 			{
-				if (this.GetMatchState() == MatchState.HomeWin)
-					return 3;
-				else if (this.GetMatchState() == MatchState.ForeignWin)
-					return 0;
-
-				return 1;
+				switch (this.GetMatchState())
+				{
+					case MatchState.HomeWin:
+						return 3;
+					case MatchState.ForeignWin:
+						return 0;
+					case MatchState.Split:
+						return 1;
+					default:
+						throw new ArgumentOutOfRangeException(this.GetMatchState().ToString());
+				}
 			}
 		}
 
@@ -59,26 +34,26 @@ namespace CompetitionSimulation
 		{
 			get
 			{
-				if (this.GetMatchState() == MatchState.HomeWin)
-					return 0;
-				else if (this.GetMatchState() == MatchState.ForeignWin)
-					return 3;
-
-				return 1;
+				switch (this.GetMatchState())
+				{
+					case MatchState.HomeWin:
+						return 0;
+					case MatchState.ForeignWin:
+						return 3;
+					case MatchState.Split:
+						return 1;
+					default:
+						throw new ArgumentOutOfRangeException(this.GetMatchState().ToString());
+				}
 			}
 		}
 
-		public Match(
-			ITeam homeTeam,
-			ITeam foreignTeam,
-			int homeScore,
-			int foreignScore
-		)
+		public Match(ITeam homeTeam, ITeam foreignTeam, int homeScore, int foreignScore)
 		{
-			this.homeTeam = homeTeam;
-			this.foreignTeam = foreignTeam;
-			this.homeScore = homeScore;
-			this.foreignScore = foreignScore;
+			this.HomeTeam = homeTeam;
+			this.ForeignTeam = foreignTeam;
+			this.HomeScore = homeScore;
+			this.ForeignScore = foreignScore;
 		}
 
 		public MatchState GetMatchState()

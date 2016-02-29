@@ -48,7 +48,7 @@
     <Compile Include="Basket.cs" />
     <Compile Include="Algorithm\IAlgorithm.cs" />
     <Compile Include="CompetitionTable\TeamResult.cs" />
-    <Compile Include="CompetitionTable\CompetitionThreeTable.cs" />
+    <Compile Include="CompetitionTable\CompetitionTable.cs" />
     <Compile Include="IBasket.cs" />
     <Compile Include="CompetitionTable\ICompetitionTable.cs" />
     <Compile Include="IMatch.cs" />

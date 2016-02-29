@@ -6,9 +6,9 @@
 
 	public class CompetitionTable : ICompetitionTable
 	{
-		private IEnumerable<ITeam> teams;
-		private List<IMatch> matches;
-		private Dictionary<ITeam, TeamResult> results;
+		private readonly IEnumerable<ITeam> teams;
+		private readonly List<IMatch> matches;
+		private readonly Dictionary<ITeam, TeamResult> results;
 
 		public CompetitionTable(
 			IEnumerable<ITeam> inputTeam
@@ -76,6 +76,7 @@
 				}
 				else	// nastupuji dalsi kriteria
 				{
+					var miniTable = new CompetitionTable(teamList.Value);
 
 				}
 			}

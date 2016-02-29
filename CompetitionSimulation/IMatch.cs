@@ -11,7 +11,6 @@
 		int HomePoint { get; }
 		int ForeignPoint { get; }
 
-
 		MatchState GetMatchState();
 	}
 }
