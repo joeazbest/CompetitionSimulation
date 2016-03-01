@@ -1,7 +1,7 @@
 ﻿namespace CompetitionSimulationTest
 {
 	using CompetitionSimulation;
-	using CompetitionSimulation.CompetitionTable;
+	using CompetitionSimulation.Tables;
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
 	using System.Collections.Generic;
 	using System.Linq;

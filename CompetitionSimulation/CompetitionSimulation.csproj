@@ -45,12 +45,12 @@
   <ItemGroup>
     <Compile Include="Algorithm\Algorithm.cs" />
     <Compile Include="Algorithm\PrimitiveAlgorithm.cs" />
-    <Compile Include="Basket.cs" />
+    <Compile Include="BasketSix.cs" />
     <Compile Include="Algorithm\IAlgorithm.cs" />
-    <Compile Include="CompetitionTable\TeamResult.cs" />
-    <Compile Include="CompetitionTable\CompetitionTable.cs" />
+    <Compile Include="Tables\TeamResult.cs" />
+    <Compile Include="Tables\CompetitionTable.cs" />
     <Compile Include="IBasket.cs" />
-    <Compile Include="CompetitionTable\ICompetitionTable.cs" />
+    <Compile Include="Tables\ICompetitionTable.cs" />
     <Compile Include="IMatch.cs" />
     <Compile Include="IRound.cs" />
     <Compile Include="ITeam.cs" />

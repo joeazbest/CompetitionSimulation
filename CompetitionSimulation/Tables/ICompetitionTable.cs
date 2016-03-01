@@ -1,4 +1,4 @@
-﻿namespace CompetitionSimulation.CompetitionTable
+﻿namespace CompetitionSimulation.Tables
 {
 	using System.Collections.Generic;
 

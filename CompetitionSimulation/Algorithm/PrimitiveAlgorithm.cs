@@ -1,10 +1,8 @@
 ﻿namespace CompetitionSimulation.Algorithm
 {
-	using CompetitionTable;
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
-	using System.Linq;
 
 	public class PrimitiveAlgorithm : Algorithm
 	{
@@ -21,7 +19,6 @@
 			var output = new List<IBasket>();
 			for (var i = 1; i <= teams.Count / 6; i++)
 			{   // TODO tohle jde urcite lip, ale tohle je ted dostatecny
-
 				var teamOrder = new Dictionary<int, ITeam>
 				{
 					{ (i-1)*6+1, teams[(i-1)*6] },
@@ -33,14 +30,11 @@
 				};
 
 				output.Add(
-					new Basket(
+					new BasketSix(
 						i.ToString(),
 						i,
 						1,
-						teamOrder,
-						new CompetitionTable(	// TODO tohle volim
-							teamOrder.Select(t => t.Value)
-						)
+						teamOrder
 					)
 				);
 			}
