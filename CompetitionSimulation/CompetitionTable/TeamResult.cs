@@ -9,6 +9,14 @@
 		internal int MyGoals { get; private set; }
 		internal int OtherGoals { get; private set; }
 
+		internal int DiffScore
+		{
+			get
+			{
+				return this.MyGoals - this.OtherGoals;
+			}
+		}
+
 		// melo by jit jen o zapasy ktere se na vysledku podilely
 		internal List<IMatch> Matches { get; private set; }
 

@@ -141,16 +141,18 @@
 			return this.results.GroupBy(t => t.Value.Points).ToDictionary(t => t.Key, t => t.Select(r => r.Key).ToList());
 		}
 
-		internal IDictionary<int, IEnumerable<ITeam>> GetTeamShootGoalsOrder(
+		internal Dictionary<int, List<ITeam>> GetTeamShootGoalsOrder(
 			IEnumerable<ITeam> filterTeam
 		)
 		{
-			throw new NotImplementedException();
+			return this.results.Where(t => filterTeam.Contains(t.Key)).GroupBy(t => t.Value.MyGoals).ToDictionary(t => t.Key, t => t.Select(r => r.Key).ToList());
 		}
 
-		internal IDictionary<int, IEnumerable<ITeam>> GetTeamScoreDiffOrder(IEnumerable<ITeam> filterTeam)
+		internal Dictionary<int, List<ITeam>> GetTeamScoreDiffOrder(
+			IEnumerable<ITeam> filterTeam
+		)
 		{
-			throw new NotImplementedException();
+			return this.results.Where(t => filterTeam.Contains(t.Key)).GroupBy(t => t.Value.DiffScore).ToDictionary(t => t.Key, t => t.Select(r => r.Key).ToList());
 		}
 	}
 }

@@ -5,6 +5,7 @@
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
 	using System.Collections.Generic;
 	using System.Linq;
+
 	[TestClass]
 	public class CompetitionTableTest
 	{
@@ -46,7 +47,8 @@
 			{
 				new Team("Team1", x => 1),
 				new Team("Team2", x => 1),
-				new Team("Team3", x => 1)
+				new Team("Team3", x => 1),
+				new Team("Team4", x => 1)
 			};
 
 			var table1 = new CompetitionTable(teamList);
@@ -54,16 +56,111 @@
 			var table3 = new CompetitionTable(teamList);
 			var table4 = new CompetitionTable(teamList);
 
-			// poradi t1, t2, t3
+			// minitabulka vzajemnych zapasu poradi by melo byt t4, t3, t1, t2
 			table1.AddMatches(
 				new List<IMatch>
 				{
-					new Match(teamList[0], teamList[1], 0, 0),
+					new Match(teamList[0], teamList[1], 2, 0),
+					new Match(teamList[0], teamList[2], 1, 6),
+					new Match(teamList[0], teamList[3], 1, 4),
+
 					new Match(teamList[1], teamList[2], 1, 0),
-					new Match(teamList[2], teamList[0], 0, 2)
+					new Match(teamList[1], teamList[3], 1, 5),
+
+					new Match(teamList[2], teamList[3], 2, 2)
 				}
+			);
+
+			ExpectedOrder(
+				table1.GetTableResult(),
+				teamList[3],
+				teamList[2],
+				teamList[0],
+				teamList[1]
+			);
+
+			// vyšší počet vstřelených branek v minitabulce -> poradi t1, t4, t3, t2
+			table2.AddMatches(
+				new List<IMatch>
+				{
+					new Match(teamList[0], teamList[1], 2, 0),
+					new Match(teamList[0], teamList[2], 7, 6),
+					new Match(teamList[0], teamList[3], 9, 4),
+
+					new Match(teamList[1], teamList[2], 1, 0),
+					new Match(teamList[1], teamList[3], 1, 5),
+
+					new Match(teamList[2], teamList[3], 3, 2)
+				}
+			);
+
+			ExpectedOrder(
+				table2.GetTableResult(),
+				teamList[0],
+				teamList[3],
+				teamList[2],
+				teamList[1]
+			);
+
+			// kladnější celkový rozdíl -> poradi t1, t3, t2, t4
+			table3.AddMatches(
+				new List<IMatch>
+				{
+					new Match(teamList[0], teamList[1], 2, 0),
+					new Match(teamList[0], teamList[2], 7, 6),
+					new Match(teamList[0], teamList[3], 9, 4),
+
+					new Match(teamList[1], teamList[2], 1, 0),
+					new Match(teamList[1], teamList[3], 0, 1),
+
+					new Match(teamList[2], teamList[3], 1, 0)
+				}
+			);
+
+			ExpectedOrder(
+				table3.GetTableResult(),
+				teamList[0],
+				teamList[2],
+				teamList[1],
+				teamList[3]
+			);
+
+			// kladnější celkový rozdíl -> poradi t1, t4, t3, t2
+			table4.AddMatches(
+				new List<IMatch>
+				{
+					new Match(teamList[0], teamList[1], 2, 0),
+					new Match(teamList[0], teamList[2], 7, 5),
+					new Match(teamList[0], teamList[3], 9, 7),
+
+					new Match(teamList[1], teamList[2], 1, 0),
+					new Match(teamList[1], teamList[3], 0, 1),
+
+					new Match(teamList[2], teamList[3], 1, 0)
+				}
+			);
+
+			ExpectedOrder(
+				table4.GetTableResult(),
+				teamList[0],
+				teamList[3],
+				teamList[2],
+				teamList[1]
 			);
 		}
 
+		private static void ExpectedOrder(
+			IDictionary<int, ITeam> orderResult,
+			params ITeam[] expectedTeamOrder
+		)
+		{
+			// tise predpokladam ze pocet clenu je shodny
+			var order = 0;
+			foreach (var team in expectedTeamOrder)
+			{
+				Assert.AreEqual(expectedTeamOrder[order], orderResult[order + 1]);
+				order++;
+			}
+		}
 	}
 }
