@@ -21,7 +21,7 @@ namespace CompetitionSimulation
 		{
 			var output = new Dictionary<int, ITeam>();
 			var order = 1;
-			foreach (var basket in this.Baskets.OrderBy(t => t.GetOrder()))
+			foreach (var basket in this.Baskets.OrderBy(t => t.Order))
 			{
 				foreach (var team in basket.GetBasketResult())
 				{

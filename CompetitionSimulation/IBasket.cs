@@ -4,14 +4,13 @@ namespace CompetitionSimulation
 
 	public interface IBasket
 	{
-		int GetOrder();
+		int Order { get; }
+		int Round { get; }
 
-		string GetName();
+		string Name { get; }
 
 		IDictionary<int, ITeam> GetBasketResult();
 
 		IEnumerable<IMatch> GetBasketeMatches();
-
-		int GetTeamCount();
 	}
 }

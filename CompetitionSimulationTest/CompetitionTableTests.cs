@@ -7,7 +7,7 @@
 	using System.Linq;
 
 	[TestClass]
-	public class CompetitionTableTest
+	public class CompetitionTableTests
 	{
 		[TestMethod]
 		public void CreateSimpleOrderTest()

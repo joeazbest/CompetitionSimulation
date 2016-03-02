@@ -32,6 +32,9 @@
 
 		public void AddMatch(IMatch match)
 		{
+			if (!this.teams.Contains(match.HomeTeam) || !this.teams.Contains(match.HomeTeam))
+				throw new ArgumentOutOfRangeException("Team is not in Table");
+
 			this.matches.Add(match);
 			this.results[match.HomeTeam].AddMatch(match, match.HomeTeam);
 			this.results[match.ForeignTeam].AddMatch(match, match.ForeignTeam);
@@ -45,6 +48,9 @@
 			this.matches.AddRange(matchesAdd);
 			foreach (var match in matchesAdd)
 			{
+				if (!this.teams.Contains(match.HomeTeam) || !this.teams.Contains(match.HomeTeam))
+					throw new ArgumentOutOfRangeException("Team is not in Table");
+
 				this.results[match.HomeTeam].AddMatch(match, match.HomeTeam);
 				this.results[match.ForeignTeam].AddMatch(match, match.ForeignTeam);
 			}
