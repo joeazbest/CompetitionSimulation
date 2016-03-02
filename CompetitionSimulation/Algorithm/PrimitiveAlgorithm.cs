@@ -21,12 +21,12 @@
 			{   // TODO tohle jde urcite lip, ale tohle je ted dostatecny
 				var teamOrder = new Dictionary<int, ITeam>
 				{
-					{ (i-1)*6+1, teams[(i-1)*6] },
-					{ (i-1)*6+2, teams[(i-1)*6+1] },
-					{ (i-1)*6+3, teams[(i-1)*6+2] },
-					{ (i-1)*6+4, teams[(i-1)*6+3] },
-					{ (i-1)*6+5, teams[(i-1)*6+4] },
-					{ (i-1)*6+6, teams[(i-1)*6+5] },
+					{ 1, teams[(i-1)*6] },
+					{ 2, teams[(i-1)*6+1] },
+					{ 3, teams[(i-1)*6+2] },
+					{ 4, teams[(i-1)*6+3] },
+					{ 5, teams[(i-1)*6+4] },
+					{ 6, teams[(i-1)*6+5] },
 				};
 
 				output.Add(
@@ -42,6 +42,7 @@
 			return output;
 		}
 
+		// TODO prejmenovat asi i na neco jinyho Create asi neni nejlepsi
 		public IList<IBasket> CreateRoundBasket(IDictionary<int, ITeam> previousRoundResult)
 		{
 			throw new NotImplementedException();

@@ -8,7 +8,7 @@
 		// TODO - poradatelstvi
 		public static void Main(string[] args)
 		{
-			var roundCount = 6;
+			var roundCount = 2;
 			// nacteni seznamu tymu - vim seznam typu a vim jejich funkci, kterea urcuje jejich silu v prubehu casovych useku (kola)
 			var teams = new List<ITeam>();
 			for (var i = 1; i <= 36; i++)
