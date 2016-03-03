@@ -61,22 +61,21 @@
 			return this.matches;
 		}
 
-		/*
-		* Stejný počet bodů
-		* -> minitabulka vzajemnych zapasu
-		* -> vyšší počet vstřelených branek v minitabulce
-		* -> kladnější celkový rozdíl
-		* -> vyšší počet celkových vstřelených branek
-		* -> los
-		*/
-
+		/// <summary>
+		///  Stejný počet bodů
+		/// -> minitabulka vzajemnych zapasu
+		/// -> vyšší počet vstřelených branek v minitabulce
+		/// -> kladnější celkový rozdíl
+		/// -> vyšší počet celkových vstřelených branek
+		/// -> los
+		/// </summary>
 		public IDictionary<int, ITeam> GetTableResult()
 		{
 			// TODO jestli je tabulka uplna - tj jestli je to odehrano kazdy s kazdym n krat - ve chvili kdy ziskavam vysledky
 			var output = new Dictionary<int, ITeam>();
 
 			var order = 1;
-			foreach (var teamList in GetTeamPointOrder().OrderByDescending(t => t.Key))
+			foreach (var teamList in this.GetTeamPointOrder().OrderByDescending(t => t.Key))
 			{
 				// existuje pouze jeden team s danymi body
 				if (teamList.Value.Count == 1)

@@ -1,12 +1,13 @@
 namespace CompetitionSimulation
 {
+	using Baskets;
 	using System.Collections.Generic;
 	using System.Linq;
 
 	public class Round : IRound
 	{
-		private readonly int Order;
-		private readonly IList<IBasket> Baskets;
+		public int Order { get; }
+		private readonly IList<IBasket> baskets;
 
 		internal Round(
 			int order,
@@ -14,14 +15,14 @@ namespace CompetitionSimulation
 			)
 		{
 			this.Order = order;
-			this.Baskets = baskets;
+			this.baskets = baskets;
 		}
 
 		public IDictionary<int, ITeam> GetRoundResult()
 		{
 			var output = new Dictionary<int, ITeam>();
 			var order = 1;
-			foreach (var basket in this.Baskets.OrderBy(t => t.Order))
+			foreach (var basket in this.baskets.OrderBy(t => t.Order))
 			{
 				foreach (var team in basket.GetBasketResult())
 				{
@@ -31,11 +32,6 @@ namespace CompetitionSimulation
 			}
 
 			return output;
-		}
-
-		public int GetOrder()
-		{
-			return this.Order;
 		}
 	}
 }

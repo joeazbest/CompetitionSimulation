@@ -4,23 +4,18 @@
 
 	public class Team : ITeam
 	{
-		private readonly string Name;
-		private readonly Func<decimal, decimal> PowerComputer;
+		public string Name { get; }
+		private readonly Func<decimal, decimal> powerComputer;
 
 		public Team(string name, Func<decimal, decimal> powerComputer)
 		{
 			this.Name = name;
-			this.PowerComputer = powerComputer;
+			this.powerComputer = powerComputer;
 		}
 
 		public decimal GetCurrentPower(int round)
 		{
-			return PowerComputer(round);
-		}
-
-		public string GetName()
-		{
-			return this.Name;
+			return this.powerComputer(round);
 		}
 	}
 }

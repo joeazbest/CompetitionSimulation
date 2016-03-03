@@ -1,5 +1,6 @@
 ﻿namespace CompetitionSimulation.Tests
 {
+	using Baskets;
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
 	using System.Collections.Generic;
 	using System.Linq;

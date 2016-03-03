@@ -4,8 +4,8 @@
 
 	public interface IRound
 	{
-		IDictionary<int, ITeam> GetRoundResult();
+		int Order { get; }
 
-		int GetOrder();
+		IDictionary<int, ITeam> GetRoundResult();
 	}
 }

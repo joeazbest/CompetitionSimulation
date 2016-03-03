@@ -1,5 +1,6 @@
 ﻿namespace CompetitionSimulation.Algorithm
 {
+	using Baskets;
 	using System.Collections.Generic;
 
 	public abstract class Algorithm : IAlgorithm
