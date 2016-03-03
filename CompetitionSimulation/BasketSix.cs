@@ -2,6 +2,7 @@
 {
 	using System;
 	using System.Collections.Generic;
+	using System.Linq;
 	using Tables;
 
 	public class BasketSix : IBasket
@@ -13,59 +14,89 @@
 		private readonly List<IMatch> Matches;
 		private readonly IDictionary<int, ITeam> BasketResult;
 
+		private Object computeLock = new Object();
+
 		public BasketSix(
 			string name,
 			int order,
-			int round,
-			IDictionary<int, ITeam> basketInnitial
+			int round
 		)
 		{
-			if (basketInnitial == null || basketInnitial.Count != 6)
-				throw new ArgumentException("Team Count is 6 to need");
-
 			this.Name = name;
 			this.Order = order;
 			this.Round = round;
-			this.BasketInnitial = basketInnitial;   //	TODO mozna se me to bude hodit
+			this.BasketInnitial = new Dictionary<int, ITeam>();
 			this.Matches = new List<IMatch>();
+			this.BasketResult = new Dictionary<int, ITeam>();
+		}
 
-			// TODO poradi je treba si nejak vymyslet
+		public void AddTeam(int order, ITeam team)
+		{
+			if (order < 1 || order > 6)
+				throw new ArgumentOutOfRangeException("Order has to be between 1 and 6");
+			if (this.BasketInnitial.ContainsKey(order))
+				throw new ArgumentException("This Order is already add");
+
+			this.BasketInnitial.Add(order, team);
+		}
+
+		public void AddTeams(IDictionary<int, ITeam> teams)
+		{
+			foreach (var team in teams)
+			{
+				var order = team.Key;
+				if (order < 1 || order > 6)
+					throw new ArgumentOutOfRangeException("Order has to be between 1 and 6");
+				if (this.BasketInnitial.ContainsKey(order))
+					throw new ArgumentException("This Order is already add");
+
+				this.BasketInnitial.Add(order, team.Value);
+			}
+		}
+
+		// bacha na zamikani
+		private void CreateBasketResults()
+		{
+			if (this.BasketInnitial.Count != 6)
+				throw new ArgumentException("Team Count is 6 to need");
+
+			// na poradi vcelku kaslu, tohle je testovaci algoritmus
 			var table1 = new CompetitionTable(
 				new List<ITeam>
 				{
-					basketInnitial[1],
-					basketInnitial[3],
-					basketInnitial[4]
+					this.BasketInnitial[1],
+					this.BasketInnitial[3],
+					this.BasketInnitial[4]
 				}
 			);
 
 			table1.AddMatches(
 				new List<IMatch>
 				{
-					MatchCreate(basketInnitial[1], basketInnitial[3], true),
-					MatchCreate(basketInnitial[3], basketInnitial[4], true),
-					MatchCreate(basketInnitial[4], basketInnitial[1], true)
+					MatchCreate(this.BasketInnitial[1], this.BasketInnitial[3], true),
+					MatchCreate(this.BasketInnitial[3], this.BasketInnitial[4], true),
+					MatchCreate(this.BasketInnitial[4], this.BasketInnitial[1], true)
 				}
 			);
 
-			// TODO tohle fakt neni dobry
+			// TODO tohle fakt neni dobry - vytvrarim neco a pak to hned vytahavam a ukladam
 			this.Matches.AddRange(table1.GetMatches());
 
 			var table2 = new CompetitionTable(
 				new List<ITeam>
 				{
-					basketInnitial[2],
-					basketInnitial[5],
-					basketInnitial[6]
+					this.BasketInnitial[2],
+					this.BasketInnitial[5],
+					this.BasketInnitial[6]
 				}
 			);
 
 			table2.AddMatches(
 				new List<IMatch>
 				{
-					MatchCreate(basketInnitial[2], basketInnitial[6], true),
-					MatchCreate(basketInnitial[6], basketInnitial[5], true),
-					MatchCreate(basketInnitial[5], basketInnitial[2], true)
+					MatchCreate(this.BasketInnitial[2], this.BasketInnitial[6], true),
+					MatchCreate(this.BasketInnitial[6], this.BasketInnitial[5], true),
+					MatchCreate(this.BasketInnitial[5], this.BasketInnitial[2], true)
 				}
 			);
 
@@ -75,8 +106,6 @@
 			// vim jaky pocty tam jsou cely to vytvarim sam
 			var table1Result = table1.GetTableResult();
 			var table2Result = table2.GetTableResult();
-
-			this.BasketResult = new Dictionary<int, ITeam>();
 
 			// TODO - tohle v tomto pripade rucne je dost voser ale mozna je to dostatecny
 			var finalMatch = MatchCreate(table1Result[1], table2Result[1], false);
@@ -112,12 +141,31 @@
 
 		public IEnumerable<IMatch> GetBasketeMatches()
 		{
-			return this.Matches;
+			lock (computeLock)
+			{
+				if (!this.Matches.Any())
+				{
+					this.CreateBasketResults();
+				}
+				return this.Matches;
+			}
 		}
 
 		public IDictionary<int, ITeam> GetBasketResult()
 		{
-			return this.BasketResult;
+			lock (computeLock)
+			{
+				if (!this.BasketResult.Any())
+				{
+					this.CreateBasketResults();
+				}
+				return this.BasketResult;
+			}
+		}
+
+		public IDictionary<int, ITeam> GetBasketIntitialOrder()
+		{
+			return this.BasketInnitial;
 		}
 	}
 }

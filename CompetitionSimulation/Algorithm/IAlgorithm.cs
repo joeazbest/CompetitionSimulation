@@ -6,14 +6,8 @@
 	{
 		IList<IBasket> CreateInitialBasket(IList<ITeam> teams);
 
-		//IDictionary<int, IMatch> ComputeBasketMatches(
-		//	IDictionary<int, ITeam> oneBasket,
-		//	int round
-		//);
+		IList<IBasket> GetNextBasketComposition(IList<IBasket> previousBaskets);
 
-		//IDictionary<int, ITeam> ComputeBasketTeamOrder(
-		//	IDictionary<int, ITeam> oneBasket,
-		//	IDictionary<int, IMatch> basketMatches
-		//);
+		IList<ITeam> GetTeamFinalOrder(IList<IBasket> baskets);
 	}
 }

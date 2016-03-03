@@ -8,14 +8,12 @@
 			IList<ITeam> teams
 		);
 
-		//public abstract IDictionary<int, IMatch> ComputeBasketMatches(
-		//	IDictionary<int, ITeam> oneBasket,
-		//	int round
-		//);
+		public abstract IList<IBasket> GetNextBasketComposition(
+			IList<IBasket> previousBaskets
+		);
 
-		//public abstract IDictionary<int, ITeam> ComputeBasketTeamOrder(
-		//	IDictionary<int, ITeam> oneBasket,
-		//	IDictionary<int, IMatch> basketMatches
-		//);
+		public abstract IList<ITeam> GetTeamFinalOrder(
+			IList<IBasket> baskets
+		);
 	}
 }

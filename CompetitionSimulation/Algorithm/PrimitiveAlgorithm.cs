@@ -3,6 +3,7 @@
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
+	using System.Linq;
 
 	public class PrimitiveAlgorithm : Algorithm
 	{
@@ -15,6 +16,9 @@
 
 			if (teams.Count % 6 != 0)
 				throw new InvalidDataException("Only divisible by 6");
+
+			if (teams.Count < 12)
+				throw new InvalidDataException("Minimal team count is 12");
 
 			var output = new List<IBasket>();
 			for (var i = 1; i <= teams.Count / 6; i++)
@@ -29,68 +33,99 @@
 					{ 6, teams[(i-1)*6+5] },
 				};
 
+				var currentBasket = new BasketSix(
+					i.ToString(),
+					i,
+					1
+				);
+				currentBasket.AddTeams(teamOrder);
+
 				output.Add(
-					new BasketSix(
-						i.ToString(),
-						i,
-						1,
-						teamOrder
-					)
+					currentBasket
 				);
 			}
 
 			return output;
 		}
 
-		// TODO prejmenovat asi i na neco jinyho Create asi neni nejlepsi
-		public IList<IBasket> CreateRoundBasket(IDictionary<int, ITeam> previousRoundResult)
+		public override IList<IBasket> GetNextBasketComposition(
+			IList<IBasket> previousBaskets
+		)
 		{
-			throw new NotImplementedException();
+			// v tomto algoritmu neresim uzivatele a mam skupiny prave po 6ti a ani se me nijak nemeni poradi
+			var currentRound = previousBaskets.First().Round + 1;
+
+			var outputBasket = new List<IBasket>();
+
+			// vlozim prazdny kosiky
+			for (var i = 1; i <= previousBaskets.Count(); i++)
+			{
+				outputBasket.Add(new BasketSix(
+					i.ToString(),
+					i,
+					currentRound
+					)
+				);
+			}
+
+			foreach (var basket in previousBaskets)
+			{
+				var result = basket.GetBasketResult();
+
+				if (basket.Order == 1)  // prvni kos
+				{
+					outputBasket[0].AddTeams(
+						result.Where(t => t.Key < 6).ToDictionary(t => t.Key, t => t.Value)
+					);
+
+					outputBasket[1].AddTeam(
+						1, result[6]
+					);
+				}
+				else if (basket.Order == previousBaskets.Count)     // posledni kos
+				{
+					outputBasket[previousBaskets.Count - 1].AddTeams(
+						result.Where(t => t.Key > 1).ToDictionary(t => t.Key, t => t.Value)
+					);
+
+					outputBasket[previousBaskets.Count - 2].AddTeam(
+						6, result[1]
+					);
+				}
+				else
+				{
+					// bacha na pocitani - pole od nuly poradi od jednicky
+					outputBasket[basket.Order - 1].AddTeams(
+						result.Where(t => t.Key > 1 && t.Key < 6).ToDictionary(t => t.Key, t => t.Value)
+					);
+
+					outputBasket[basket.Order - 2].AddTeam(
+						6, result[1]
+					);
+
+					outputBasket[basket.Order].AddTeam(
+						1, result[6]
+					);
+				}
+			}
+
+			return outputBasket;
 		}
 
-		//public override IDictionary<int, IMatch> ComputeBasketMatches(
-		//	IDictionary<int, ITeam> oneBasket,
-		//	int round
-		//)
-		//{
-		//	if (oneBasket.Count != 6)
-		//		throw new InvalidDataException("Only divisible by 6");
+		// v tomto pripade podobny GetNextBasketComposition tak to zneuziju :-)
+		public override IList<ITeam> GetTeamFinalOrder(
+			IList<IBasket> baskets
+		)
+		{
+			var output = new List<ITeam>();
 
-		//	var matches = new Dictionary<int, IMatch>();
-		//	var order = 1;
-		//	// zvolim skupinu 1, 4, 5 a 2, 3, 6
-		//	matches.Add(order++, new Match(oneBasket[1], oneBasket[4], GetMatchState(oneBasket[1], oneBasket[4], round)));
-		//	matches.Add(order++, new Match(oneBasket[1], oneBasket[5], GetMatchState(oneBasket[1], oneBasket[4], round)));
-		//	matches.Add(order++, new Match(oneBasket[4], oneBasket[5], GetMatchState(oneBasket[1], oneBasket[4], round)));
+			var newOrder = GetNextBasketComposition(baskets);
+			foreach(var basket in newOrder.OrderBy(t => t.Order))
+			{
+				output.AddRange(basket.GetBasketIntitialOrder().OrderBy(t => t.Key).Select(t => t.Value));
+			}
 
-		//	matches.Add(order++, new Match(oneBasket[2], oneBasket[3], GetMatchState(oneBasket[1], oneBasket[4], round)));
-		//	matches.Add(order++, new Match(oneBasket[2], oneBasket[6], GetMatchState(oneBasket[1], oneBasket[4], round)));
-		//	matches.Add(order, new Match(oneBasket[3], oneBasket[6], GetMatchState(oneBasket[1], oneBasket[4], round)));
-
-		//	// urcim poradi ve skupine
-
-		//	return null;
-		//}
-
-		//public override IDictionary<int, ITeam> ComputeBasketTeamOrder(
-		//	IDictionary<int, ITeam> oneBasket,
-		//	IDictionary<int, IMatch> basketMatches
-		//)
-		//{
-		//	throw new NotImplementedException();
-		//}
-
-		//private MatchState GetMatchState(ITeam team1, ITeam team2, int round)
-		//{
-		//	var team1Power = team1.GetCurrentPower(round);
-		//	var team2Power = team2.GetCurrentPower(round);
-
-		//	if (team1Power < team2Power)
-		//		return MatchState.HomeWin;
-		//	else if (team2Power > team1Power)
-		//		return MatchState.ForeignWin;
-		//	else
-		//		return MatchState.Split;
-		//}
+			return output;
+		}
 	}
 }
