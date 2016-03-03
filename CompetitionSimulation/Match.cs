@@ -12,6 +12,14 @@
 
 		public ITeam ForeignTeam { get; }
 
+		public Match(ITeam homeTeam, ITeam foreignTeam, int homeScore, int foreignScore)
+		{
+			this.HomeTeam = homeTeam;
+			this.ForeignTeam = foreignTeam;
+			this.HomeScore = homeScore;
+			this.ForeignScore = foreignScore;
+		}
+
 		public int HomePoint
 		{
 			get
@@ -20,10 +28,13 @@
 				{
 					case MatchState.HomeWin:
 						return 3;
+
 					case MatchState.ForeignWin:
 						return 0;
+
 					case MatchState.Split:
 						return 1;
+
 					default:
 						throw new ArgumentOutOfRangeException(this.GetMatchState().ToString());
 				}
@@ -38,22 +49,17 @@
 				{
 					case MatchState.HomeWin:
 						return 0;
+
 					case MatchState.ForeignWin:
 						return 3;
+
 					case MatchState.Split:
 						return 1;
+
 					default:
 						throw new ArgumentOutOfRangeException(this.GetMatchState().ToString());
 				}
 			}
-		}
-
-		public Match(ITeam homeTeam, ITeam foreignTeam, int homeScore, int foreignScore)
-		{
-			this.HomeTeam = homeTeam;
-			this.ForeignTeam = foreignTeam;
-			this.HomeScore = homeScore;
-			this.ForeignScore = foreignScore;
 		}
 
 		public MatchState GetMatchState()

@@ -12,7 +12,7 @@ namespace CompetitionSimulation
 		internal Round(
 			int order,
 			IList<IBasket> baskets
-			)
+		)
 		{
 			this.Order = order;
 			this.baskets = baskets;

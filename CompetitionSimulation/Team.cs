@@ -7,7 +7,10 @@
 		public string Name { get; }
 		private readonly Func<decimal, decimal> powerComputer;
 
-		public Team(string name, Func<decimal, decimal> powerComputer)
+		public Team(
+			string name,
+			Func<decimal, decimal> powerComputer
+		)
 		{
 			this.Name = name;
 			this.powerComputer = powerComputer;
