@@ -5,7 +5,7 @@
 	using System.Linq;
 	using Tables;
 
-	public class BasketSix : IBasket
+	public class PrimitiveBasketSix: IBasket
 	{
 		public string Name { get; }
 		public int Order { get; }
@@ -16,7 +16,7 @@
 
 		private object computeLock = new object();
 
-		public BasketSix(
+		public PrimitiveBasketSix(
 			string name,
 			int order,
 			int round

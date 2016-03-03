@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Algorithm\Algorithm.cs" />
     <Compile Include="Algorithm\PrimitiveAlgorithm.cs" />
-    <Compile Include="Baskets\BasketSix.cs" />
+    <Compile Include="Baskets\PrimitiveBasketSix.cs" />
     <Compile Include="Algorithm\IAlgorithm.cs" />
     <Compile Include="Tables\TeamResult.cs" />
     <Compile Include="Tables\CompetitionTable.cs" />

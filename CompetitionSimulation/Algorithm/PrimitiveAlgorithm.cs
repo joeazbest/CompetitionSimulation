@@ -34,7 +34,7 @@
 					{ 6, teams[((i - 1) * 6) + 5] },
 				};
 
-				var currentBasket = new BasketSix(
+				var currentBasket = new PrimitiveBasketSix(
 					i.ToString(),
 					i,
 					1
@@ -61,7 +61,7 @@
 			// vlozim prazdny kosiky
 			for (var i = 1; i <= previousBaskets.Count(); i++)
 			{
-				outputBasket.Add(new BasketSix(
+				outputBasket.Add(new PrimitiveBasketSix(
 					i.ToString(),
 					i,
 					currentRound

@@ -18,7 +18,7 @@
 			var team5 = new Team("Team5", x => 5);
 			var team6 = new Team("Team6", x => 6);
 
-			var basket = new BasketSix(
+			var basket = new PrimitiveBasketSix(
 				"Test",
 				1,
 				1
