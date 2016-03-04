@@ -1,4 +1,4 @@
-﻿namespace CompetitionSimulation.Algorithm
+﻿namespace CompetitionSimulation.Algorithms
 {
 	using Baskets;
 	using System.Collections.Generic;

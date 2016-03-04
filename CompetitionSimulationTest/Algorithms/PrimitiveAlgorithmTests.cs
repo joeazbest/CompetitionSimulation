@@ -1,4 +1,4 @@
-﻿namespace CompetitionSimulation.Algorithm.Tests
+﻿namespace CompetitionSimulation.Algorithms.Tests
 {
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
 	using System.Collections.Generic;

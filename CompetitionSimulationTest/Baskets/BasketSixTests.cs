@@ -1,4 +1,4 @@
-﻿namespace CompetitionSimulation.Tests
+﻿namespace CompetitionSimulation.Baskets.Tests
 {
 	using Baskets;
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
