@@ -6,7 +6,10 @@
 	using System.IO;
 	using System.Linq;
 
-	public class PrimitiveAlgorithm : Algorithm
+	/// <summary>
+	/// velmi primitivni algoritmus pocitam s poctem delitelnym 6ti
+	/// </summary>
+	public sealed class PrimitiveAlgorithm : Algorithm
 	{
 		public override IList<IBasket> CreateInitialBasket(
 			IList<ITeam> teams
@@ -59,7 +62,7 @@
 			var outputBasket = new List<IBasket>();
 
 			// vlozim prazdny kosiky
-			for (var i = 1; i <= previousBaskets.Count(); i++)
+			for (var i = 1; i <= previousBaskets.Count; i++)
 			{
 				outputBasket.Add(new PrimitiveBasketSix(
 					i.ToString(),
