@@ -5,7 +5,7 @@
 	using System.Linq;
 	using Tables;
 
-	public class PrimitiveBasketSix: IBasket
+	public class PrimitiveBasketSix : IBasket
 	{
 		public string Name { get; }
 		public int Order { get; }
@@ -14,7 +14,7 @@
 		private readonly List<IMatch> matches;
 		private readonly IDictionary<int, ITeam> basketResult;
 
-		private object computeLock = new object();
+		private readonly object computeLock = new object();
 
 		public PrimitiveBasketSix(
 			string name,
@@ -33,7 +33,7 @@
 		public void AddTeam(int order, ITeam team)
 		{
 			if (order < 1 || order > 6)
-				throw new ArgumentOutOfRangeException("Order has to be between 1 and 6");
+				throw new ArgumentOutOfRangeException(nameof(order), "order has to be between 1 and 6");
 			if (this.basketInnitial.ContainsKey(order))
 				throw new ArgumentException("This Order is already add");
 
@@ -46,7 +46,7 @@
 			{
 				var order = team.Key;
 				if (order < 1 || order > 6)
-					throw new ArgumentOutOfRangeException("Order has to be between 1 and 6");
+					throw new ArgumentOutOfRangeException(nameof(order), "order has to be between 1 and 6");
 				if (this.basketInnitial.ContainsKey(order))
 					throw new ArgumentException("This Order is already add");
 
@@ -54,11 +54,12 @@
 			}
 		}
 
-		// bacha na zamikani
+		// bacha na zamykani
 		private void CreateBasketResults()
 		{
+			// do jedne tabulky jde 1, 3, 4 a do druhe 2, 5, 6 - je to jen pro otestovani
 			if (this.basketInnitial.Count != 6)
-				throw new ArgumentException("Team Count is 6 to need");
+				throw new ArgumentException("Team Count is nessecery 6");
 
 			// na poradi vcelku kaslu, tohle je testovaci algoritmus
 			var table1 = new CompetitionTable(
@@ -124,7 +125,7 @@
 			this.basketResult.Add(place++, middleMatch.GetMatchState() == MatchState.HomeWin ? middleMatch.ForeignTeam : middleMatch.HomeTeam);
 
 			this.basketResult.Add(place++, lastMatch.GetMatchState() == MatchState.HomeWin ? lastMatch.HomeTeam : lastMatch.ForeignTeam);
-			this.basketResult.Add(place++, lastMatch.GetMatchState() == MatchState.HomeWin ? lastMatch.ForeignTeam : lastMatch.HomeTeam);
+			this.basketResult.Add(place, lastMatch.GetMatchState() == MatchState.HomeWin ? lastMatch.ForeignTeam : lastMatch.HomeTeam);
 		}
 
 		private IMatch MatchCreate(

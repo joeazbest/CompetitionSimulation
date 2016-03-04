@@ -1,10 +1,10 @@
-﻿namespace CompetitionSimulationTest
+﻿namespace CompetitionSimulationTest.Tables
 {
+	using System.Collections.Generic;
+	using System.Linq;
 	using CompetitionSimulation;
 	using CompetitionSimulation.Tables;
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
-	using System.Collections.Generic;
-	using System.Linq;
 
 	[TestClass]
 	public class CompetitionTableTests
@@ -158,7 +158,7 @@
 			var order = 0;
 			foreach (var team in expectedTeamOrder)
 			{
-				Assert.AreEqual(expectedTeamOrder[order], orderResult[order + 1]);
+				Assert.AreEqual(team, orderResult[order + 1]);
 				order++;
 			}
 		}

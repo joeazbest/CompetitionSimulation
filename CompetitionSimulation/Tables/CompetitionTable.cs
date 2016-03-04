@@ -33,7 +33,7 @@
 		public void AddMatch(IMatch match)
 		{
 			if (!this.teams.Contains(match.HomeTeam) || !this.teams.Contains(match.HomeTeam))
-				throw new ArgumentOutOfRangeException("Team is not in Table");
+				throw new ArgumentOutOfRangeException(nameof(match), "Team is not in Table");
 
 			this.matches.Add(match);
 			this.results[match.HomeTeam].AddMatch(match, match.HomeTeam);
@@ -49,7 +49,7 @@
 			foreach (var match in matchesAdd)
 			{
 				if (!this.teams.Contains(match.HomeTeam) || !this.teams.Contains(match.HomeTeam))
-					throw new ArgumentOutOfRangeException("Team is not in Table");
+					throw new ArgumentOutOfRangeException(nameof(match), "Team is not in Table");
 
 				this.results[match.HomeTeam].AddMatch(match, match.HomeTeam);
 				this.results[match.ForeignTeam].AddMatch(match, match.ForeignTeam);
@@ -99,7 +99,7 @@
 							// vyssi pocet vstrelenych braek v minitabulce
 							foreach (var scoreMiniTableTeam in miniTable.GetTeamShootGoalsOrder(miniTeamList.Value).OrderByDescending(t => t.Key))
 							{
-								if (scoreMiniTableTeam.Value.Count() == 1)
+								if (scoreMiniTableTeam.Value.Count == 1)
 								{
 									output.Add(order++, scoreMiniTableTeam.Value.Single());
 								}
@@ -109,7 +109,7 @@
 									foreach (
 										var diffTotalScore in this.GetTeamScoreDiffOrder(scoreMiniTableTeam.Value).OrderByDescending(t => t.Key))
 									{
-										if (diffTotalScore.Value.Count() == 1)
+										if (diffTotalScore.Value.Count == 1)
 										{
 											output.Add(order++, diffTotalScore.Value.Single());
 										}
@@ -117,7 +117,7 @@
 										{
 											foreach (var scoreTotal in this.GetTeamShootGoalsOrder(diffTotalScore.Value).OrderByDescending(t => t.Key))
 											{
-												if (scoreTotal.Value.Count() == 1)
+												if (scoreTotal.Value.Count == 1)
 												{
 													output.Add(order++, scoreTotal.Value.Single());
 												}
