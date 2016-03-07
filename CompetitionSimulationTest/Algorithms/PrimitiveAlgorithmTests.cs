@@ -9,7 +9,7 @@
 	public class PrimitiveAlgorithmTests
 	{
 		[TestMethod]
-		public void CreateInitialBasketTest()
+		public void RunningTrougntTest()
 		{
 			var teams = new List<ITeam>();
 			for (var i = 1; i <= 18; i++)

@@ -25,13 +25,13 @@
 				throw new IndexOutOfRangeException("Order of teams are strange");
 
 			// na poradi (1, 3, 4) vcelku kaslu, tohle je testovaci algoritmus - ale uzivam to v testu
-			var tableA = CreateTable(new List<int> { 1, 4, 5 });
-			var matchesA = CreateTableMatches(new List<int> { 1, 4, 5 });
+			var tableA = CreateTable(new List<int> { 1, 3, 5 });
+			var matchesA = CreateTableMatches(new List<int> { 1, 3, 5 });
 			tableA.AddMatches(matchesA);
 			this.matches.AddRange(matchesA);
 
-			var tableB = CreateTable(new List<int> { 2, 3, 6 });
-			var matchesB = CreateTableMatches(new List<int> { 2, 3, 6 });
+			var tableB = CreateTable(new List<int> { 2, 4, 6 });
+			var matchesB = CreateTableMatches(new List<int> { 2, 4, 6 });
 			tableB.AddMatches(matchesB);
 			this.matches.AddRange(matchesB);
 

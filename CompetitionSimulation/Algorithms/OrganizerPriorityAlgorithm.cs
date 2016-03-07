@@ -23,7 +23,9 @@
 			if (teams.Count < 18)
 				throw new InvalidDataException("Minimal team count is 18");
 
-			var output = new List<IBasket>();
+			// TODO kontrola konzistence poradatelstvi, jestli to vychazi
+
+			var zeroRound = new List<IBasket>();
 			for (var i = 1; i <= teams.Count / 6; i++)
 			{   // TODO tohle jde urcite lip, ale tohle je ted dostatecny
 				var teamOrder = new Dictionary<int, ITeam>
@@ -43,7 +45,7 @@
 				);
 
 				currentBasket.AddTeams(teamOrder);
-				output.Add(
+				zeroRound.Add(
 					currentBasket
 				);
 			}
