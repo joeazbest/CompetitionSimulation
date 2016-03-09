@@ -13,35 +13,41 @@
 		{
 			var teams = new List<ITeam>()
 			{
-				new Team("11", x => 11, new List<int> { 1 }),
-				new Team("2", x => 2, new List<int> { 2 }),
-				new Team("15", x => 15, new List<int> { 3 }),
-				new Team("4", x => 4, new List<int> { 4 }),
-				new Team("5", x => 4, new List<int> { 5 }),
-				new Team("6", x => 6, new List<int> { 6 }),
+				new Team("11", x => 11, AddOrganizer(1, "1")),
+				new Team("2", x => 2, AddOrganizer(2, "1")),
+				new Team("15", x => 15, AddOrganizer(3, "1")),
+				new Team("4", x => 4, AddOrganizer(4, "1")),
+				new Team("5", x => 4, AddOrganizer(5, "1")),
+				new Team("6", x => 6, AddOrganizer(6, "1")),
 
-				new Team("7", x => 7, new List<int> { 1 }),
-				new Team("8", x => 8, new List<int> { 2 }),
-				new Team("3", x => 3, new List<int> { 3 }),
-				new Team("10", x => 10, new List<int> { 4 }),
-				new Team("17", x => 17, new List<int> { 5 }),
-				new Team("12", x => 12, new List<int> { 6 }),
+				new Team("7", x => 7, AddOrganizer(1, "2")),
+				new Team("8", x => 8, AddOrganizer(2, "2")),
+				new Team("3", x => 3, AddOrganizer(3, "2")),
+				new Team("10", x => 10, AddOrganizer(4, "2")),
+				new Team("17", x => 17, AddOrganizer(5, "2")),
+				new Team("12", x => 12, AddOrganizer(6, "2")),
 
-				new Team("13", x => 13, new List<int> { 1 }),
-				new Team("14", x => 14, new List<int> { 2 }),
-				new Team("9", x => 9, new List<int> { 3 }),
-				new Team("16", x => 16, new List<int> { 4 }),
-				new Team("1", x => 1, new List<int> { 5 }),
-				new Team("18", x => 18, new List<int> { 6 })
+				new Team("13", x => 13, AddOrganizer(1, "3")),
+				new Team("14", x => 14, AddOrganizer(2, "3")),
+				new Team("9", x => 9, AddOrganizer(3, "3")),
+				new Team("16", x => 16, AddOrganizer(4, "3")),
+				new Team("1", x => 1, AddOrganizer(5, "3")),
+				new Team("18", x => 18, AddOrganizer(6, "3"))
 			};
 
 			// mam 6 kol a 6 organizatoru
-			var alg = new OrganizerPriorityAlgorithm();
+			var alg = new OrganizerPriorityAlgorithm(teams);
 
-			var innitialBasket = alg.CreateInitialBasket(teams);
-			Assert.AreEqual(3, innitialBasket.Count);
+			var round1 = alg.CreateInitialBasket();
+			Assert.AreEqual(3, round1.Count);
+			// poradatel na poslednim miste
+			Assert.AreEqual(round1[0].GetBasketIntitialOrder()[6], teams[0]);
+			Assert.AreEqual(round1[0].GetBasketIntitialOrder()[1], teams[1]);
+			Assert.AreEqual(round1[1].GetBasketIntitialOrder()[6], teams[6]);
+			Assert.AreEqual(round1[1].GetBasketIntitialOrder()[1], teams[7]);
+			Assert.AreEqual(round1[2].GetBasketIntitialOrder()[6], teams[12]);
+			Assert.AreEqual(round1[2].GetBasketIntitialOrder()[1], teams[13]);
 
-			var round1 = alg.GetNextBasketComposition(innitialBasket);
 			var round2 = alg.GetNextBasketComposition(round1);
 			var round3 = alg.GetNextBasketComposition(round2);
 			var round4 = alg.GetNextBasketComposition(round3);
@@ -72,6 +78,14 @@
 			Assert.AreEqual(teams[1], finalOrder[15]);
 			Assert.AreEqual(teams[8], finalOrder[16]);
 			Assert.AreEqual(teams[16], finalOrder[17]);
+		}
+
+		private List<Organizer> AddOrganizer(
+			int round,
+			string basket
+		)
+		{
+			return new List<Organizer> { new Organizer(round, basket) };
 		}
 	}
 }

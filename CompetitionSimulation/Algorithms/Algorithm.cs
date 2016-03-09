@@ -5,9 +5,7 @@
 
 	public abstract class Algorithm : IAlgorithm
 	{
-		public abstract IList<IBasket> CreateInitialBasket(
-			IList<ITeam> teams
-		);
+		public abstract IList<IBasket> CreateInitialBasket();
 
 		public abstract IList<IBasket> GetNextBasketComposition(
 			IList<IBasket> previousBaskets

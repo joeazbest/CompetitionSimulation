@@ -7,7 +7,7 @@
 	{
 		public string Name { get; }
 		private readonly Func<decimal, decimal> powerComputer;
-		private readonly List<int> organizerRound;
+		private readonly List<Organizer> organizer;
 
 		public Team(
 			string name,
@@ -16,18 +16,18 @@
 		{
 			this.Name = name;
 			this.powerComputer = powerComputer;
-			this.organizerRound = new List<int>();
+			this.organizer = new List<Organizer>();
 		}
 
 		public Team(
 			string name,
 			Func<decimal, decimal> powerComputer,
-			List<int> organizerRound
+			List<Organizer> organizerRound
 		)
 		{
 			this.Name = name;
 			this.powerComputer = powerComputer;
-			this.organizerRound = organizerRound;
+			this.organizer = organizerRound;
 		}
 
 		public decimal GetCurrentPower(int round)
@@ -35,9 +35,24 @@
 			return this.powerComputer(round);
 		}
 
-		public List<int> OrganizerRound()
+		public List<Organizer> GetOrganizer()
 		{
-			return this.organizerRound;
+			return this.organizer;
+		}
+	}
+
+	public class Organizer
+	{
+		public int Round { get; }
+		public string Basket { get; }
+
+		public Organizer(
+			int round,
+			string basket
+		)
+		{
+			this.Round = round;
+			this.Basket = basket;
 		}
 	}
 }

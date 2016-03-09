@@ -3,7 +3,9 @@
 	using CompetitionSimulation;
 	using CompetitionSimulation.Algorithms;
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
+	using System;
 	using System.Collections.Generic;
+	using System.IO;
 
 	[TestClass]
 	public class PrimitiveAlgorithmTests
@@ -19,9 +21,9 @@
 				teams.Add(team);
 			}
 
-			var alg = new PrimitiveAlgorithm();
+			var alg = new PrimitiveAlgorithm(teams);
 
-			var innitialBasket = alg.CreateInitialBasket(teams);
+			var innitialBasket = alg.CreateInitialBasket();
 			Assert.AreEqual(3, innitialBasket.Count);
 
 			var firstRoundBasket = alg.GetNextBasketComposition(innitialBasket);
@@ -42,6 +44,27 @@
 			Assert.AreEqual(teams[1], finalOrder[12]);
 			Assert.AreEqual(teams[13], finalOrder[14]);
 			Assert.AreEqual(teams[6], finalOrder[16]);
+		}
+
+		[TestMethod]
+		[ExpectedException(typeof(ArgumentNullException))]
+		public void CreateInitialBasketArgumentNullExceptionTest()
+		{
+			var alg = new PrimitiveAlgorithm(null);
+			alg.CreateInitialBasket();
+		}
+
+		[TestMethod]
+		[ExpectedException(typeof(InvalidDataException))]
+		public void CreateInitialBasketInvalidDataExceptionExceptionTest()
+		{
+			var alg = new PrimitiveAlgorithm(
+				new List<ITeam>
+				{
+					new Team("1", x => 1)
+				}
+			);
+			alg.CreateInitialBasket();
 		}
 	}
 }

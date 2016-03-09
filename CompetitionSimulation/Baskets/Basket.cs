@@ -10,12 +10,12 @@ namespace CompetitionSimulation.Baskets
 		public int Order { get; }
 		public int Round { get; }
 		public string Name { get; }
+		public int BasketTeamCount { get; }
 
 		protected readonly IDictionary<int, ITeam> basketInnitial;
 		protected readonly List<IMatch> matches;
 		protected readonly IDictionary<int, ITeam> basketResult;
-
-		protected readonly int BasketTeamCount;
+		protected readonly IDictionary<ITeam, int> previousBasketPlace;
 
 		private readonly object computeLock = new object();
 
@@ -34,9 +34,10 @@ namespace CompetitionSimulation.Baskets
 			this.basketInnitial = new Dictionary<int, ITeam>();
 			this.matches = new List<IMatch>();
 			this.basketResult = new Dictionary<int, ITeam>();
+			this.previousBasketPlace = new Dictionary<ITeam, int>();
 		}
 
-		public virtual void AddTeam(
+		public void AddTeam(
 			int order,
 			ITeam team
 		)
@@ -47,6 +48,19 @@ namespace CompetitionSimulation.Baskets
 				throw new ArgumentException("This Order is already add");
 
 			this.basketInnitial.Add(order, team);
+		}
+
+		public void AddTeam(
+			int order,
+			ITeam team,
+			int? previousBasketOrder
+		)
+		{
+			AddTeam(order, team);
+			if (previousBasketOrder.HasValue)
+			{
+				this.previousBasketPlace.Add(team, previousBasketOrder.Value);
+			}
 		}
 
 		public void AddTeams(
@@ -65,12 +79,44 @@ namespace CompetitionSimulation.Baskets
 			}
 		}
 
-		public virtual IDictionary<int, ITeam> GetBasketIntitialOrder()
+		public bool AddTeamFromBottom(
+			ITeam team,
+			int? previousBasketOrder = null
+		)
+		{
+			for (var order = this.BasketTeamCount; order >= 1; order--)
+			{
+				if (!this.basketInnitial.ContainsKey(order))
+				{
+					this.basketInnitial.Add(order, team);
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public bool AddTeamFromTop(
+			ITeam team,
+			int? previousBasketOrder = null
+		)
+		{
+			for (var order = 1; order <= this.BasketTeamCount; order++)
+			{
+				if (!this.basketInnitial.ContainsKey(order))
+				{
+					this.basketInnitial.Add(order, team);
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public IDictionary<int, ITeam> GetBasketIntitialOrder()
 		{
 			return this.basketInnitial;
 		}
 
-		public virtual IDictionary<int, ITeam> GetBasketResult()
+		public IDictionary<int, ITeam> GetBasketResult()
 		{
 			lock (this.computeLock)
 			{
@@ -82,7 +128,7 @@ namespace CompetitionSimulation.Baskets
 			}
 		}
 
-		public virtual IEnumerable<IMatch> GetBasketeMatches()
+		public IEnumerable<IMatch> GetBasketeMatches()
 		{
 			lock (this.computeLock)
 			{
@@ -92,6 +138,11 @@ namespace CompetitionSimulation.Baskets
 				}
 				return this.matches;
 			}
+		}
+
+		public IDictionary<ITeam, int> GetPreviousBasketTeam()
+		{
+			return this.previousBasketPlace;
 		}
 
 		protected IMatch MatchCreate(

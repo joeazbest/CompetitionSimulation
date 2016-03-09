@@ -5,7 +5,7 @@
 
 	public interface IAlgorithm
 	{
-		IList<IBasket> CreateInitialBasket(IList<ITeam> teams);
+		IList<IBasket> CreateInitialBasket();
 
 		IList<IBasket> GetNextBasketComposition(IList<IBasket> previousBaskets);
 

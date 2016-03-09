@@ -7,6 +7,6 @@
 		string Name { get; }
 		decimal GetCurrentPower(int round);
 
-		List<int> OrganizerRound();
+		List<Organizer> GetOrganizer();
 	}
 }

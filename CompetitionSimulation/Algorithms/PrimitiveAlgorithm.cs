@@ -11,9 +11,9 @@
 	/// </summary>
 	public sealed class PrimitiveAlgorithm : Algorithm
 	{
-		public override IList<IBasket> CreateInitialBasket(
-			IList<ITeam> teams
-		)
+		private readonly IList<ITeam> Teams;
+
+		public PrimitiveAlgorithm(IList<ITeam> teams)
 		{
 			if (teams == null)
 				throw new ArgumentNullException(nameof(teams));
@@ -24,17 +24,22 @@
 			if (teams.Count < 12)
 				throw new InvalidDataException("Minimal team count is 12");
 
+			this.Teams = teams;
+		}
+
+		public override IList<IBasket> CreateInitialBasket()
+		{
 			var output = new List<IBasket>();
-			for (var i = 1; i <= teams.Count / 6; i++)
+			for (var i = 1; i <= this.Teams.Count / 6; i++)
 			{   // TODO tohle jde urcite lip, ale tohle je ted dostatecny
 				var teamOrder = new Dictionary<int, ITeam>
 				{
-					{ 1, teams[(i - 1) * 6] },
-					{ 2, teams[((i - 1) * 6) + 1] },
-					{ 3, teams[((i - 1) * 6) + 2] },
-					{ 4, teams[((i - 1) * 6) + 3] },
-					{ 5, teams[((i - 1) * 6) + 4] },
-					{ 6, teams[((i - 1) * 6) + 5] },
+					{ 1, this.Teams[(i - 1) * 6] },
+					{ 2, this.Teams[((i - 1) * 6) + 1] },
+					{ 3, this.Teams[((i - 1) * 6) + 2] },
+					{ 4, this.Teams[((i - 1) * 6) + 3] },
+					{ 5, this.Teams[((i - 1) * 6) + 4] },
+					{ 6, this.Teams[((i - 1) * 6) + 5] },
 				};
 
 				var currentBasket = new PrimitiveBasketSix(
