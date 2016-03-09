@@ -30,6 +30,11 @@
 			this.organizer = organizerRound;
 		}
 
+		public void AddOrganizer(Organizer organizerRound)
+		{
+			this.organizer.Add(organizerRound);
+		}
+
 		public decimal GetCurrentPower(int round)
 		{
 			return this.powerComputer(round);
@@ -38,21 +43,6 @@
 		public List<Organizer> GetOrganizer()
 		{
 			return this.organizer;
-		}
-	}
-
-	public class Organizer
-	{
-		public int Round { get; }
-		public string Basket { get; }
-
-		public Organizer(
-			int round,
-			string basket
-		)
-		{
-			this.Round = round;
-			this.Basket = basket;
 		}
 	}
 }

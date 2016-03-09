@@ -50,6 +50,7 @@
     <Compile Include="Baskets\Basket.cs" />
     <Compile Include="Baskets\PrimitiveBasketSix.cs" />
     <Compile Include="Algorithms\IAlgorithm.cs" />
+    <Compile Include="Organizer.cs" />
     <Compile Include="Tables\TeamResult.cs" />
     <Compile Include="Tables\CompetitionTable.cs" />
     <Compile Include="Baskets\IBasket.cs" />
