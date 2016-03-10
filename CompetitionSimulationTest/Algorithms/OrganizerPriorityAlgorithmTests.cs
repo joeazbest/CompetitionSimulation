@@ -4,6 +4,7 @@
 	using CompetitionSimulation.Algorithms;
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
 	using System.Collections.Generic;
+	using CompetitionSimulation.Teams;
 
 	[TestClass]
 	public class OrganizerPriorityAlgorithmTests

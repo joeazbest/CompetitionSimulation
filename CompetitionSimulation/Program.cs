@@ -5,6 +5,7 @@
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
+	using CompetitionSimulation.Teams;
 
 	public class Program
 	{
@@ -15,8 +16,8 @@
 
 			for (var i = 1; i <= 1000; i++)
 			{
+				// seznam tymu
 				var teams = new Dictionary<double, ITeam>();
-
 				for (var teamOrder = 1; teamOrder <= 18; teamOrder++)
 				{
 					var value = teamOrder;  // predpokladam ze dve rnd cisla nebudou v 18ti cisle stejny :-)
@@ -26,8 +27,8 @@
 					);
 				}
 
+				// pridam poradatelstvi
 				var teamInput = teams.OrderBy(t => t.Key).Select(t => t.Value).ToList();
-
 				var order = 1;
 				var basket = 1;
 				foreach (var team in teamInput)
@@ -44,6 +45,7 @@
 				}
 				output.WriteLine();
 
+				// projedu jednotlivy algoritmy
 				var alg1 = new PrimitiveAlgorithm(teamInput);
 				var alg2 = new OrganizerPriorityAlgorithm(teamInput);
 

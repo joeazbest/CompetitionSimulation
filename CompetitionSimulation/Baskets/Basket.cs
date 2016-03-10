@@ -4,6 +4,7 @@ namespace CompetitionSimulation.Baskets
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
+	using CompetitionSimulation.Teams;
 
 	public abstract class Basket : IBasket
 	{

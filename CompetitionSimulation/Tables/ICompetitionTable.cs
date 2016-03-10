@@ -1,6 +1,8 @@
 ﻿namespace CompetitionSimulation.Tables
 {
 	using System.Collections.Generic;
+	using CompetitionSimulation.Baskets;
+	using CompetitionSimulation.Teams;
 
 	public interface ICompetitionTable
 	{

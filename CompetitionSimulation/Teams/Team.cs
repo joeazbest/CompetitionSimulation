@@ -1,4 +1,4 @@
-﻿namespace CompetitionSimulation
+﻿namespace CompetitionSimulation.Teams
 {
 	using System;
 	using System.Collections.Generic;

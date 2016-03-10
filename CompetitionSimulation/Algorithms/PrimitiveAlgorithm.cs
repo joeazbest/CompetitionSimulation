@@ -5,6 +5,7 @@
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
+	using CompetitionSimulation.Teams;
 
 	/// <summary>
 	/// velmi primitivni algoritmus pocitam s poctem delitelnym 6ti

@@ -1,5 +1,7 @@
-﻿namespace CompetitionSimulation
+﻿namespace CompetitionSimulation.Baskets
 {
+	using CompetitionSimulation.Teams;
+
 	public interface IMatch
 	{
 		int HomeScore { get; }

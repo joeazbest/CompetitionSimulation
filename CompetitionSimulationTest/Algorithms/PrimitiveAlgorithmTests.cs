@@ -6,6 +6,7 @@
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
+	using CompetitionSimulation.Teams;
 
 	[TestClass]
 	public class PrimitiveAlgorithmTests

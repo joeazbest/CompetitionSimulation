@@ -1,4 +1,4 @@
-﻿namespace CompetitionSimulation
+﻿namespace CompetitionSimulation.Baskets
 {
 	public enum MatchState
 	{

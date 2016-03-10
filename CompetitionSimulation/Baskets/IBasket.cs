@@ -1,6 +1,7 @@
 namespace CompetitionSimulation.Baskets
 {
 	using System.Collections.Generic;
+	using CompetitionSimulation.Teams;
 
 	public interface IBasket
 	{

@@ -2,6 +2,7 @@
 {
 	using Baskets;
 	using System.Collections.Generic;
+	using CompetitionSimulation.Teams;
 
 	public interface IAlgorithm
 	{

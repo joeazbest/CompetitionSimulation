@@ -5,6 +5,7 @@
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
+	using CompetitionSimulation.Teams;
 
 	// TODO hodil by se asi mensi refactoring je to dost dlouhy a nekter veci se opakujou
 	/// <summary>

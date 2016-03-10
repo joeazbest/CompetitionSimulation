@@ -1,4 +1,4 @@
-﻿namespace CompetitionSimulation
+﻿namespace CompetitionSimulation.Teams
 {
 	public class Organizer
 	{

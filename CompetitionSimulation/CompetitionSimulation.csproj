@@ -50,24 +50,25 @@
     <Compile Include="Baskets\Basket.cs" />
     <Compile Include="Baskets\PrimitiveBasketSix.cs" />
     <Compile Include="Algorithms\IAlgorithm.cs" />
-    <Compile Include="Organizer.cs" />
+    <Compile Include="Teams\Organizer.cs" />
     <Compile Include="Tables\TeamResult.cs" />
     <Compile Include="Tables\CompetitionTable.cs" />
     <Compile Include="Baskets\IBasket.cs" />
     <Compile Include="Tables\ICompetitionTable.cs" />
-    <Compile Include="IMatch.cs" />
+    <Compile Include="Baskets\IMatch.cs" />
     <Compile Include="IRound.cs" />
-    <Compile Include="ITeam.cs" />
-    <Compile Include="Match.cs" />
-    <Compile Include="MatchState.cs" />
+    <Compile Include="Teams\ITeam.cs" />
+    <Compile Include="Baskets\Match.cs" />
+    <Compile Include="Baskets\MatchState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Round.cs" />
-    <Compile Include="Team.cs" />
+    <Compile Include="Teams\Team.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
