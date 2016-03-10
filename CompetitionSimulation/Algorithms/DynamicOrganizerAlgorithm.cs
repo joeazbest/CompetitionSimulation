@@ -59,7 +59,7 @@
 			for (var b = 1; b <= this.BasketCount; b++)
 			{
 				output.Add(
-					new Basket135(
+					new Basket145(
 						b.ToString(),
 						b,
 						1
@@ -93,6 +93,8 @@
 
 			var roundOrganizer = this.Organizer[nextRound];
 			var teamOrganizer = roundOrganizer.Values.ToList();             // ty ktery poradaji
+			var teamOrganizerBasket = roundOrganizer.ToDictionary(t => t.Value, t => t.Key);    // ktery kosik podle nazvu poradaji
+			var teamOrganizerOrder = new List<ITeam>();
 
 			var upTeams = new Dictionary<int, ITeam>();                     // postupujici tymy - maximalne jeden na kosik
 			var downTeams = new Dictionary<int, ITeam>();                   // sestupujici tymy - maximalne jeden na kosik
@@ -100,10 +102,15 @@
 			var usedTeams = new HashSet<ITeam>();                           // vsechny pouzite driv
 			teamOrganizer.ForEach(t => usedTeams.Add(t));
 
-			foreach (var basket in previousBaskets)
+			foreach (var basket in previousBaskets.OrderBy(t => t.Order))
 			{
 				foreach (var teamBasket in basket.GetBasketResult())
 				{
+					if (teamOrganizer.Contains(teamBasket.Value))
+					{
+						teamOrganizerOrder.Add(teamBasket.Value);
+					}
+
 					if (teamBasket.Key == 1 && basket.Order != 1)
 					{
 						if (!teamOrganizer.Contains(teamBasket.Value))
@@ -111,7 +118,6 @@
 							upTeams.Add(basket.Order - 1, teamBasket.Value);
 							usedTeams.Add(teamBasket.Value);
 						}
-
 					}
 					else if (teamBasket.Key == basket.BasketTeamCount && basket.Order != this.BasketCount)
 					{
@@ -125,26 +131,127 @@
 			}
 
 			var output = new List<IBasket>();
-			for(var b = 1; b<= this.BasketCount; b++)
+			for (var b = 1; b <= this.BasketCount; b++)
 			{
-				
+				var basketIndex = b - 1;
+				var organizer = teamOrganizerOrder[basketIndex];
+
 				output.Add(
 					new Basket145(
-						b.ToString(),
+						teamOrganizerBasket[organizer],
 						b,
 						nextRound
 					)
 				);
+
+				// poradatel a postupujic a sestupujici
+				output[basketIndex].AddTeam(6, organizer);
+				if (upTeams.ContainsKey(b))
+				{
+					output[basketIndex].AddTeamFromBottom(upTeams[b]);
+				}
+
+				if (downTeams.ContainsKey(b))
+				{
+					output[basketIndex].AddTeamFromTop(downTeams[b]);
+				}
 			}
 
-			return null;
+			var basketOrder = 0;
+			foreach (var basket in previousBaskets.OrderBy(t => t.Order))
+			{
+				foreach (var team in basket.GetBasketResult().OrderBy(t => t.Key))
+				{
+					if (usedTeams.Contains(team.Value))
+						continue;
+
+					while (!output[basketOrder].AddTeamFromTop(team.Value))
+					{
+						basketOrder++;
+					}
+				}
+			}
+
+			return output;
 		}
 
 		public override IList<ITeam> GetTeamFinalOrder(
 			IList<IBasket> baskets
 		)
 		{
-			return null;
+			var finalRound = baskets.First().Round + 1;
+
+			var upTeams = new Dictionary<int, ITeam>();                     // postupujici tymy - maximalne jeden na kosik
+			var downTeams = new Dictionary<int, ITeam>();                   // sestupujici tymy - maximalne jeden na kosik
+
+			var usedTeams = new HashSet<ITeam>();                           // vsechny pouzite driv
+
+			foreach (var basket in baskets.OrderBy(t => t.Order))
+			{
+				foreach (var teamBasket in basket.GetBasketResult())
+				{
+					if (teamBasket.Key == 1 && basket.Order != 1)
+					{
+						upTeams.Add(basket.Order - 1, teamBasket.Value);
+						usedTeams.Add(teamBasket.Value);
+					}
+					else if (teamBasket.Key == basket.BasketTeamCount && basket.Order != this.BasketCount)
+					{
+						downTeams.Add(basket.Order + 1, teamBasket.Value);
+						usedTeams.Add(teamBasket.Value);
+					}
+				}
+			}
+
+			var output = new List<IBasket>();
+			for (var b = 1; b <= this.BasketCount; b++)
+			{
+				output.Add(
+					new Basket135(
+						b.ToString(),       // tady me nazev moc nezajima uz ani
+						b,
+						finalRound
+					)
+				);
+
+				var basketIndex = b - 1;
+
+				// tihle by se tam meli vejit oboji :-) nepotrebuju navaratovou hodnotu
+				if (upTeams.ContainsKey(b))
+				{
+					output[basketIndex].AddTeamFromBottom(upTeams[b]);
+				}
+
+				if (downTeams.ContainsKey(b))
+				{
+					output[basketIndex].AddTeamFromTop(downTeams[b]);
+				}
+			}
+
+			var basketOrder = 0;
+			foreach (var basket in baskets.OrderBy(t => t.Order))
+			{
+				foreach (var team in basket.GetBasketResult().OrderBy(t => t.Key))
+				{
+					if (usedTeams.Contains(team.Value))
+						continue;
+
+					while (!output[basketOrder].AddTeamFromTop(team.Value))
+					{
+						basketOrder++;
+					}
+				}
+			}
+
+			var teamOrder = new List<ITeam>();
+			foreach (var basket in output.OrderBy(t => t.Order))
+			{
+				foreach (var team in basket.GetBasketIntitialOrder().OrderBy(t => t.Key))
+				{
+					teamOrder.Add(team.Value);
+				}
+			}
+			return teamOrder;
 		}
 	}
 }

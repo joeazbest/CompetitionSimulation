@@ -11,7 +11,7 @@
 	public class NonOrganizerAlgorithmTests
 	{
 		[TestMethod]
-		public void RunningTrougntTest()
+		public void RunningTroughtTest()
 		{
 			var teams = new List<ITeam>();
 			for (var i = 1; i <= 18; i++)

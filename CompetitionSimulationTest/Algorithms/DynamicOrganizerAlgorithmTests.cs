@@ -1,12 +1,13 @@
 ﻿namespace CompetitionSimulationTest.Algorithms
 {
+	using System;
 	using CompetitionSimulation.Algorithms;
 	using CompetitionSimulation.Teams;
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
 	using System.Collections.Generic;
 
 	[TestClass]
-	public class OrganizerPriorityAlgorithmTests
+	public class DynamicOrganizerAlgorithmTests
 	{
 		[TestMethod]
 		public void RunningTroughtTest()
@@ -36,7 +37,7 @@
 			};
 
 			// mam 6 kol a 6 organizatoru
-			var alg = new OrganizerPriorityAlgorithm(teams);
+			var alg = new DynamicOrganizerAlgorithm(teams);
 
 			var round1 = alg.CreateInitialBasket();
 			Assert.AreEqual(3, round1.Count);
@@ -57,24 +58,26 @@
 			var finalOrder = alg.GetTeamFinalOrder(round6);
 
 			// rucne spocitanej seznam pro danej primitini algorimus s timto poradim - beru vsechy ale poradi je trochu zadrhel je treba tomu trochu verit :-)
-			// t18, t17, t16, t15, t11, t13 - t6, t14, t10, t12, t9, t8 - t7, t4, t5, t2, t3, t1
+			// t18, t17, t16, t14, t15, t12 - t13, t11, t10, t8, t9, t6 - t7, t5, t4, t2, t3, t1
+
+
 			Assert.AreEqual(teams[17], finalOrder[0]);
 			Assert.AreEqual(teams[10], finalOrder[1]);
 			Assert.AreEqual(teams[15], finalOrder[2]);
-			Assert.AreEqual(teams[2], finalOrder[3]);
-			Assert.AreEqual(teams[0], finalOrder[4]);
-			Assert.AreEqual(teams[12], finalOrder[5]);
+			Assert.AreEqual(teams[13], finalOrder[3]);
+			Assert.AreEqual(teams[2], finalOrder[4]);
+			Assert.AreEqual(teams[11], finalOrder[5]);
 
-			Assert.AreEqual(teams[5], finalOrder[6]);
-			Assert.AreEqual(teams[13], finalOrder[7]);
+			Assert.AreEqual(teams[12], finalOrder[6]);
+			Assert.AreEqual(teams[0], finalOrder[7]);
 			Assert.AreEqual(teams[9], finalOrder[8]);
-			Assert.AreEqual(teams[11], finalOrder[9]);
+			Assert.AreEqual(teams[7], finalOrder[9]);
 			Assert.AreEqual(teams[14], finalOrder[10]);
-			Assert.AreEqual(teams[7], finalOrder[11]);
+			Assert.AreEqual(teams[5], finalOrder[11]);
 
 			Assert.AreEqual(teams[6], finalOrder[12]);
-			Assert.AreEqual(teams[3], finalOrder[13]);
-			Assert.AreEqual(teams[4], finalOrder[14]);
+			Assert.AreEqual(teams[4], finalOrder[13]);
+			Assert.AreEqual(teams[3], finalOrder[14]);
 			Assert.AreEqual(teams[1], finalOrder[15]);
 			Assert.AreEqual(teams[8], finalOrder[16]);
 			Assert.AreEqual(teams[16], finalOrder[17]);

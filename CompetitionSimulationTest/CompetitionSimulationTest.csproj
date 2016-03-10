@@ -50,6 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Algorithms\DynamicOrganizerAlgorithmTests.cs" />
     <Compile Include="Algorithms\OrganizerPriorityAlgorithmTests.cs" />
     <Compile Include="Algorithms\NonOrganizerAlgorithmTests.cs" />
     <Compile Include="Baskets\Basket145Tests.cs" />
