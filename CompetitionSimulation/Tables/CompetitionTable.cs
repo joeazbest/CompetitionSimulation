@@ -3,8 +3,8 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using CompetitionSimulation.Baskets;
-	using CompetitionSimulation.Teams;
+	using Baskets;
+	using Teams;
 
 	public class CompetitionTable : ICompetitionTable
 	{

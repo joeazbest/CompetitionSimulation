@@ -1,7 +1,7 @@
 ﻿namespace CompetitionSimulation
 {
-	using CompetitionSimulation.Algorithms;
-	using CompetitionSimulation.Teams;
+	using Algorithms;
+	using Teams;
 	using System;
 	using System.Collections.Generic;
 	using System.IO;

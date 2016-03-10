@@ -1,6 +1,5 @@
 ﻿namespace CompetitionSimulationTest.Algorithms
 {
-	using System;
 	using CompetitionSimulation.Algorithms;
 	using CompetitionSimulation.Teams;
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -59,7 +58,6 @@
 
 			// rucne spocitanej seznam pro danej primitini algorimus s timto poradim - beru vsechy ale poradi je trochu zadrhel je treba tomu trochu verit :-)
 			// t18, t17, t16, t14, t15, t12 - t13, t11, t10, t8, t9, t6 - t7, t5, t4, t2, t3, t1
-
 
 			Assert.AreEqual(teams[17], finalOrder[0]);
 			Assert.AreEqual(teams[10], finalOrder[1]);

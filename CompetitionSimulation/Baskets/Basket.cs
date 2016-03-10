@@ -1,10 +1,10 @@
 namespace CompetitionSimulation.Baskets
 {
-	using CompetitionSimulation.Tables;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using CompetitionSimulation.Teams;
+	using Tables;
+	using Teams;
 
 	public abstract class Basket : IBasket
 	{
@@ -13,10 +13,10 @@ namespace CompetitionSimulation.Baskets
 		public string Name { get; }
 		public int BasketTeamCount { get; }
 
-		protected readonly IDictionary<int, ITeam> basketInnitial;
-		protected readonly List<IMatch> matches;
-		protected readonly IDictionary<int, ITeam> basketResult;
-		protected readonly IDictionary<ITeam, int> previousBasketPlace;
+		protected readonly IDictionary<int, ITeam> BasketInnitial;
+		protected readonly List<IMatch> Matches;
+		protected readonly IDictionary<int, ITeam> BasketResult;
+		protected readonly IDictionary<ITeam, int> PreviousBasketPlace;
 
 		private readonly object computeLock = new object();
 
@@ -32,10 +32,10 @@ namespace CompetitionSimulation.Baskets
 			this.Round = round;
 			this.BasketTeamCount = basketTeamCount;
 
-			this.basketInnitial = new Dictionary<int, ITeam>();
-			this.matches = new List<IMatch>();
-			this.basketResult = new Dictionary<int, ITeam>();
-			this.previousBasketPlace = new Dictionary<ITeam, int>();
+			this.BasketInnitial = new Dictionary<int, ITeam>();
+			this.Matches = new List<IMatch>();
+			this.BasketResult = new Dictionary<int, ITeam>();
+			this.PreviousBasketPlace = new Dictionary<ITeam, int>();
 		}
 
 		public void AddTeam(
@@ -45,10 +45,10 @@ namespace CompetitionSimulation.Baskets
 		{
 			if (order < 1 || order > this.BasketTeamCount)
 				throw new ArgumentOutOfRangeException(nameof(order), "order is out of limit for basket");
-			if (this.basketInnitial.ContainsKey(order))
+			if (this.BasketInnitial.ContainsKey(order))
 				throw new ArgumentException("This Order is already add");
 
-			this.basketInnitial.Add(order, team);
+			this.BasketInnitial.Add(order, team);
 		}
 
 		public void AddTeam(
@@ -60,7 +60,7 @@ namespace CompetitionSimulation.Baskets
 			AddTeam(order, team);
 			if (previousBasketOrder.HasValue)
 			{
-				this.previousBasketPlace.Add(team, previousBasketOrder.Value);
+				this.PreviousBasketPlace.Add(team, previousBasketOrder.Value);
 			}
 		}
 
@@ -73,10 +73,10 @@ namespace CompetitionSimulation.Baskets
 				var order = team.Key;
 				if (order < 1 || order > this.BasketTeamCount)
 					throw new ArgumentOutOfRangeException(nameof(order), "order is out of limit for basket");
-				if (this.basketInnitial.ContainsKey(order))
+				if (this.BasketInnitial.ContainsKey(order))
 					throw new ArgumentException("This Order is already add");
 
-				this.basketInnitial.Add(order, team.Value);
+				this.BasketInnitial.Add(order, team.Value);
 			}
 		}
 
@@ -87,9 +87,9 @@ namespace CompetitionSimulation.Baskets
 		{
 			for (var order = this.BasketTeamCount; order >= 1; order--)
 			{
-				if (!this.basketInnitial.ContainsKey(order))
+				if (!this.BasketInnitial.ContainsKey(order))
 				{
-					this.basketInnitial.Add(order, team);
+					this.BasketInnitial.Add(order, team);
 					return true;
 				}
 			}
@@ -103,9 +103,9 @@ namespace CompetitionSimulation.Baskets
 		{
 			for (var order = 1; order <= this.BasketTeamCount; order++)
 			{
-				if (!this.basketInnitial.ContainsKey(order))
+				if (!this.BasketInnitial.ContainsKey(order))
 				{
-					this.basketInnitial.Add(order, team);
+					this.BasketInnitial.Add(order, team);
 					return true;
 				}
 			}
@@ -114,18 +114,18 @@ namespace CompetitionSimulation.Baskets
 
 		public IDictionary<int, ITeam> GetBasketIntitialOrder()
 		{
-			return this.basketInnitial;
+			return this.BasketInnitial;
 		}
 
 		public IDictionary<int, ITeam> GetBasketResult()
 		{
 			lock (this.computeLock)
 			{
-				if (!this.basketResult.Any())
+				if (!this.BasketResult.Any())
 				{
 					this.CreateBasketResults();
 				}
-				return this.basketResult;
+				return this.BasketResult;
 			}
 		}
 
@@ -133,17 +133,17 @@ namespace CompetitionSimulation.Baskets
 		{
 			lock (this.computeLock)
 			{
-				if (!this.matches.Any())
+				if (!this.Matches.Any())
 				{
 					this.CreateBasketResults();
 				}
-				return this.matches;
+				return this.Matches;
 			}
 		}
 
 		public IDictionary<ITeam, int> GetPreviousBasketTeam()
 		{
-			return this.previousBasketPlace;
+			return this.PreviousBasketPlace;
 		}
 
 		protected IMatch MatchCreate(
@@ -165,7 +165,7 @@ namespace CompetitionSimulation.Baskets
 			var teams = new List<ITeam>();
 			foreach (var teamOrder in teamOrders)
 			{
-				teams.Add(this.basketInnitial[teamOrder]);
+				teams.Add(this.BasketInnitial[teamOrder]);
 			}
 			return new CompetitionTable(teams);
 		}
@@ -180,7 +180,7 @@ namespace CompetitionSimulation.Baskets
 			{
 				foreach (var teamOrder2 in teamOrders.Where(t => t > teamOrder))
 				{
-					outputMatches.Add(MatchCreate(this.basketInnitial[teamOrder], this.basketInnitial[teamOrder2], true));
+					outputMatches.Add(MatchCreate(this.BasketInnitial[teamOrder], this.BasketInnitial[teamOrder2], true));
 				}
 			}
 

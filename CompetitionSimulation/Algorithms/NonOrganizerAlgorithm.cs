@@ -5,14 +5,14 @@
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
-	using CompetitionSimulation.Teams;
+	using Teams;
 
 	/// <summary>
 	/// velmi primitivni algoritmus pocitam s poctem delitelnym 6ti
 	/// </summary>
 	public sealed class NonOrganizerAlgorithm : Algorithm
 	{
-		private readonly IList<ITeam> Teams;
+		private readonly IList<ITeam> teams;
 
 		public NonOrganizerAlgorithm(IList<ITeam> teams)
 		{
@@ -25,22 +25,22 @@
 			if (teams.Count < 12)
 				throw new InvalidDataException("Minimal team count is 12");
 
-			this.Teams = teams;
+			this.teams = teams;
 		}
 
 		public override IList<IBasket> CreateInitialBasket()
 		{
 			var output = new List<IBasket>();
-			for (var i = 1; i <= this.Teams.Count / 6; i++)
+			for (var i = 1; i <= this.teams.Count / 6; i++)
 			{   // TODO tohle jde urcite lip, ale tohle je ted dostatecny
 				var teamOrder = new Dictionary<int, ITeam>
 				{
-					{ 1, this.Teams[(i - 1) * 6] },
-					{ 2, this.Teams[((i - 1) * 6) + 1] },
-					{ 3, this.Teams[((i - 1) * 6) + 2] },
-					{ 4, this.Teams[((i - 1) * 6) + 3] },
-					{ 5, this.Teams[((i - 1) * 6) + 4] },
-					{ 6, this.Teams[((i - 1) * 6) + 5] },
+					{ 1, this.teams[(i - 1) * 6] },
+					{ 2, this.teams[((i - 1) * 6) + 1] },
+					{ 3, this.teams[((i - 1) * 6) + 2] },
+					{ 4, this.teams[((i - 1) * 6) + 3] },
+					{ 5, this.teams[((i - 1) * 6) + 4] },
+					{ 6, this.teams[((i - 1) * 6) + 5] },
 				};
 
 				var currentBasket = new Basket145(

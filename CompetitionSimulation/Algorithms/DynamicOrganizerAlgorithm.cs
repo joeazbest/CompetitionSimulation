@@ -1,7 +1,7 @@
 ﻿namespace CompetitionSimulation.Algorithms
 {
 	using Baskets;
-	using CompetitionSimulation.Teams;
+	using Teams;
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
@@ -9,9 +9,9 @@
 
 	public sealed class DynamicOrganizerAlgorithm : Algorithm
 	{
-		private readonly IList<ITeam> Teams;
-		private readonly IDictionary<int, IDictionary<string, ITeam>> Organizer;    // kolo, nazev kosiku, team
-		private readonly int BasketCount;
+		private readonly IList<ITeam> teams;
+		private readonly IDictionary<int, IDictionary<string, ITeam>> organizer;    // kolo, nazev kosiku, team
+		private readonly int basketCount;
 
 		public DynamicOrganizerAlgorithm(IList<ITeam> teams)
 		{
@@ -23,24 +23,24 @@
 			if (teams.Count < 18)
 				throw new InvalidDataException("Minimal team count is 18");
 
-			this.Teams = teams;
-			this.Organizer = new Dictionary<int, IDictionary<string, ITeam>>();
+			this.teams = teams;
+			this.organizer = new Dictionary<int, IDictionary<string, ITeam>>();
 			foreach (var team in teams)
 			{
 				foreach (var round in team.GetOrganizer())
 				{
-					if (!this.Organizer.ContainsKey(round.Round))
+					if (!this.organizer.ContainsKey(round.Round))
 					{
-						this.Organizer.Add(round.Round, new Dictionary<string, ITeam>());
+						this.organizer.Add(round.Round, new Dictionary<string, ITeam>());
 					}
-					this.Organizer[round.Round].Add(round.Basket, team);
+					this.organizer[round.Round].Add(round.Basket, team);
 				}
 			}
 
 			// TODO kontrola konzistence poradatelstvi, jestli to vychazi, jestli existuje alespon prvni kos, pripadne jak dlouha je souvisla rada
 
 			// TODO zatim jsou to jen skupiny po 6ti
-			this.BasketCount = this.Teams.Count / 6;
+			this.basketCount = this.teams.Count / 6;
 		}
 
 		// TODO stejny v OrganizerPriorityAlgorithm
@@ -49,14 +49,14 @@
 		/// </summary>
 		public override IList<IBasket> CreateInitialBasket()
 		{
-			var roundOrganizer = this.Organizer[1];
+			var roundOrganizer = this.organizer[1];
 			var teamOrganizer = roundOrganizer.Values.ToList();
 
-			if (roundOrganizer.Keys.Count != this.BasketCount)
+			if (roundOrganizer.Keys.Count != this.basketCount)
 				throw new DataMisalignedException("Organizer count and basket count are different");
 
 			var output = new List<IBasket>();
-			for (var b = 1; b <= this.BasketCount; b++)
+			for (var b = 1; b <= this.basketCount; b++)
 			{
 				output.Add(
 					new Basket145(
@@ -71,7 +71,7 @@
 
 			var order = 1;
 			var basket = 0;
-			foreach (var team in this.Teams.Where(t => !teamOrganizer.Contains(t)))
+			foreach (var team in this.teams.Where(t => !teamOrganizer.Contains(t)))
 			{
 				if (order == 6)
 				{
@@ -91,7 +91,7 @@
 		{
 			var nextRound = previousBaskets.First().Round + 1;
 
-			var roundOrganizer = this.Organizer[nextRound];
+			var roundOrganizer = this.organizer[nextRound];
 			var teamOrganizer = roundOrganizer.Values.ToList();             // ty ktery poradaji
 			var teamOrganizerBasket = roundOrganizer.ToDictionary(t => t.Value, t => t.Key);    // ktery kosik podle nazvu poradaji
 			var teamOrganizerOrder = new List<ITeam>();
@@ -119,7 +119,7 @@
 							usedTeams.Add(teamBasket.Value);
 						}
 					}
-					else if (teamBasket.Key == basket.BasketTeamCount && basket.Order != this.BasketCount)
+					else if (teamBasket.Key == basket.BasketTeamCount && basket.Order != this.basketCount)
 					{
 						if (!teamOrganizer.Contains(teamBasket.Value))
 						{
@@ -131,21 +131,21 @@
 			}
 
 			var output = new List<IBasket>();
-			for (var b = 1; b <= this.BasketCount; b++)
+			for (var b = 1; b <= this.basketCount; b++)
 			{
 				var basketIndex = b - 1;
-				var organizer = teamOrganizerOrder[basketIndex];
+				var basketOrganizer = teamOrganizerOrder[basketIndex];
 
 				output.Add(
 					new Basket145(
-						teamOrganizerBasket[organizer],
+						teamOrganizerBasket[basketOrganizer],
 						b,
 						nextRound
 					)
 				);
 
 				// poradatel a postupujic a sestupujici
-				output[basketIndex].AddTeam(6, organizer);
+				output[basketIndex].AddTeam(6, basketOrganizer);
 				if (upTeams.ContainsKey(b))
 				{
 					output[basketIndex].AddTeamFromBottom(upTeams[b]);
@@ -195,7 +195,7 @@
 						upTeams.Add(basket.Order - 1, teamBasket.Value);
 						usedTeams.Add(teamBasket.Value);
 					}
-					else if (teamBasket.Key == basket.BasketTeamCount && basket.Order != this.BasketCount)
+					else if (teamBasket.Key == basket.BasketTeamCount && basket.Order != this.basketCount)
 					{
 						downTeams.Add(basket.Order + 1, teamBasket.Value);
 						usedTeams.Add(teamBasket.Value);
@@ -204,7 +204,7 @@
 			}
 
 			var output = new List<IBasket>();
-			for (var b = 1; b <= this.BasketCount; b++)
+			for (var b = 1; b <= this.basketCount; b++)
 			{
 				output.Add(
 					new Basket135(

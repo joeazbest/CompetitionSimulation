@@ -1,12 +1,11 @@
 ﻿namespace CompetitionSimulationTest.Tables
 {
-	using System.Collections.Generic;
-	using System.Linq;
-	using CompetitionSimulation;
 	using CompetitionSimulation.Baskets;
 	using CompetitionSimulation.Tables;
 	using CompetitionSimulation.Teams;
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
+	using System.Collections.Generic;
+	using System.Linq;
 
 	[TestClass]
 	public class CompetitionTableTests

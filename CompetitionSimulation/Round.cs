@@ -3,7 +3,7 @@ namespace CompetitionSimulation
 	using Baskets;
 	using System.Collections.Generic;
 	using System.Linq;
-	using CompetitionSimulation.Teams;
+	using Teams;
 
 	public class Round : IRound
 	{

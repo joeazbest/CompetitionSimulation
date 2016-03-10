@@ -1,7 +1,7 @@
 ﻿namespace CompetitionSimulation
 {
 	using System.Collections.Generic;
-	using CompetitionSimulation.Teams;
+	using Teams;
 
 	public interface IRound
 	{

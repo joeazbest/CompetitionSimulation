@@ -1,7 +1,7 @@
 ﻿namespace CompetitionSimulation.Baskets
 {
 	using System;
-	using CompetitionSimulation.Teams;
+	using Teams;
 
 	public class Match : IMatch
 	{
