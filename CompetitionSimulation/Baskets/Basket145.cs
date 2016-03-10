@@ -4,11 +4,11 @@
 	using System.Collections.Generic;
 	using System.Linq;
 
-	public sealed class PrimitiveBasketSix : Basket
+	public sealed class Basket145 : Basket
 	{
 		private static readonly int basketTeamCount = 6;
 
-		public PrimitiveBasketSix(
+		public Basket145(
 			string name,
 			int order,
 			int round
@@ -27,13 +27,13 @@
 				throw new IndexOutOfRangeException("Order of teams are strange");
 
 			// na poradi (1, 3, 4) vcelku kaslu, tohle je testovaci algoritmus - ale uzivam to v testu
-			var tableA = CreateTable(new List<int> { 1, 3, 4 });
-			var matchesA = CreateTableMatches(new List<int> { 1, 3, 4 });
+			var tableA = CreateTable(new List<int> { 1, 4, 5 });
+			var matchesA = CreateTableMatches(new List<int> { 1, 4, 5 });
 			tableA.AddMatches(matchesA);
 			this.matches.AddRange(matchesA);
 
-			var tableB = CreateTable(new List<int> { 2, 5, 6 });
-			var matchesB = CreateTableMatches(new List<int> { 2, 5, 6 });
+			var tableB = CreateTable(new List<int> { 2, 3, 6 });
+			var matchesB = CreateTableMatches(new List<int> { 2, 3, 6 });
 			tableB.AddMatches(matchesB);
 			this.matches.AddRange(matchesB);
 

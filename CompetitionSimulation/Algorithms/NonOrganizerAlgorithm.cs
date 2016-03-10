@@ -10,11 +10,11 @@
 	/// <summary>
 	/// velmi primitivni algoritmus pocitam s poctem delitelnym 6ti
 	/// </summary>
-	public sealed class PrimitiveAlgorithm : Algorithm
+	public sealed class NonOrganizerAlgorithm : Algorithm
 	{
 		private readonly IList<ITeam> Teams;
 
-		public PrimitiveAlgorithm(IList<ITeam> teams)
+		public NonOrganizerAlgorithm(IList<ITeam> teams)
 		{
 			if (teams == null)
 				throw new ArgumentNullException(nameof(teams));
@@ -43,7 +43,7 @@
 					{ 6, this.Teams[((i - 1) * 6) + 5] },
 				};
 
-				var currentBasket = new PrimitiveBasketSix(
+				var currentBasket = new Basket145(
 					i.ToString(),
 					i,
 					1
@@ -58,6 +58,9 @@
 			return output;
 		}
 
+		/// <summary>
+		/// vzdy jeden tym sestupuje a jeden postupuje, krome prvniho a posledniho kose, nic vic se neresi
+		/// </summary>
 		public override IList<IBasket> GetNextBasketComposition(
 			IList<IBasket> previousBaskets
 		)
@@ -70,10 +73,11 @@
 			// vlozim prazdny kosiky
 			for (var i = 1; i <= previousBaskets.Count; i++)
 			{
-				outputBasket.Add(new PrimitiveBasketSix(
-					i.ToString(),
-					i,
-					currentRound
+				outputBasket.Add(
+					new Basket135(
+						i.ToString(),
+						i,
+						currentRound
 					)
 				);
 			}

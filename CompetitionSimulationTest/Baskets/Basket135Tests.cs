@@ -1,17 +1,16 @@
 ﻿namespace CompetitionSimulationTest.Baskets
 {
-	using CompetitionSimulation;
 	using CompetitionSimulation.Baskets;
+	using CompetitionSimulation.Teams;
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
 	using System.Collections.Generic;
 	using System.Linq;
-	using CompetitionSimulation.Teams;
 
 	[TestClass]
-	public class BasketSixTests
+	public class Basket135Tests
 	{
 		[TestMethod]
-		public void BasketSixTest()
+		public void Basket135Test()
 		{
 			var team1 = new Team("Team1", x => 1);
 			var team2 = new Team("Team2", x => 2);
@@ -20,7 +19,7 @@
 			var team5 = new Team("Team5", x => 5);
 			var team6 = new Team("Team6", x => 6);
 
-			var basket = new BasketSix(
+			var basket = new Basket135(
 				"Test",
 				1,
 				1

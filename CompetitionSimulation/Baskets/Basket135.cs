@@ -3,13 +3,12 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using Tables;
 
-	public sealed class BasketSix : Basket
+	public sealed class Basket135 : Basket
 	{
 		private static readonly int basketTeamCount = 6;
 
-		public BasketSix(
+		public Basket135(
 			string name,
 			int order,
 			int round
@@ -24,6 +23,7 @@
 			if ((this.basketInnitial.Keys.Min() != 1) || (this.basketInnitial.Keys.Max() != basketTeamCount))
 				throw new IndexOutOfRangeException("Order of teams are strange");
 
+			// TODO - tvorba tabulek by mohl byt vstup
 			// na poradi (1, 3, 4) vcelku kaslu, tohle je testovaci algoritmus - ale uzivam to v testu
 			var tableA = CreateTable(new List<int> { 1, 3, 5 });
 			var matchesA = CreateTableMatches(new List<int> { 1, 3, 5 });

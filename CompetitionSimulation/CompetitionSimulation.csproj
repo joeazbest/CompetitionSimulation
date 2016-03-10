@@ -44,11 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\Algorithm.cs" />
+    <Compile Include="Algorithms\DynamicOrganizerAlgorithm.cs" />
     <Compile Include="Algorithms\OrganizerPriorityAlgorithm.cs" />
-    <Compile Include="Algorithms\PrimitiveAlgorithm.cs" />
-    <Compile Include="Baskets\BasketSix.cs" />
+    <Compile Include="Algorithms\NonOrganizerAlgorithm.cs" />
+    <Compile Include="Baskets\Basket135.cs" />
     <Compile Include="Baskets\Basket.cs" />
-    <Compile Include="Baskets\PrimitiveBasketSix.cs" />
+    <Compile Include="Baskets\Basket145.cs" />
     <Compile Include="Algorithms\IAlgorithm.cs" />
     <Compile Include="Teams\Organizer.cs" />
     <Compile Include="Tables\TeamResult.cs" />

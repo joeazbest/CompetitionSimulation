@@ -51,9 +51,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Algorithms\OrganizerPriorityAlgorithmTests.cs" />
-    <Compile Include="Algorithms\PrimitiveAlgorithmTests.cs" />
-    <Compile Include="Baskets\PrimitiveBasketSixTests.cs" />
-    <Compile Include="Baskets\BasketSixTests.cs" />
+    <Compile Include="Algorithms\NonOrganizerAlgorithmTests.cs" />
+    <Compile Include="Baskets\Basket145Tests.cs" />
+    <Compile Include="Baskets\Basket135Tests.cs" />
     <Compile Include="Tables\CompetitionTableTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

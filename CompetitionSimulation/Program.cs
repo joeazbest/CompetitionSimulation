@@ -46,7 +46,7 @@
 				output.WriteLine();
 
 				// projedu jednotlivy algoritmy
-				var alg1 = new PrimitiveAlgorithm(teamInput);
+				var alg1 = new NonOrganizerAlgorithm(teamInput);
 				var alg2 = new OrganizerPriorityAlgorithm(teamInput);
 
 				var basket1First = alg1.CreateInitialBasket();

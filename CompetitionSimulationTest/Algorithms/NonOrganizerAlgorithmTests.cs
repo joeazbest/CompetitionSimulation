@@ -1,15 +1,14 @@
 ﻿namespace CompetitionSimulationTest.Algorithms
 {
-	using CompetitionSimulation;
 	using CompetitionSimulation.Algorithms;
+	using CompetitionSimulation.Teams;
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
-	using CompetitionSimulation.Teams;
 
 	[TestClass]
-	public class PrimitiveAlgorithmTests
+	public class NonOrganizerAlgorithmTests
 	{
 		[TestMethod]
 		public void RunningTrougntTest()
@@ -22,7 +21,7 @@
 				teams.Add(team);
 			}
 
-			var alg = new PrimitiveAlgorithm(teams);
+			var alg = new NonOrganizerAlgorithm(teams);
 
 			var innitialBasket = alg.CreateInitialBasket();
 			Assert.AreEqual(3, innitialBasket.Count);
@@ -33,13 +32,13 @@
 			var finalOrder = alg.GetTeamFinalOrder(secondRoundBasket);
 
 			// rucne spocitanej seznam pro danej primitini algorimus s timto poradim - vezmu kazdy druhy
-			// t18, t12, t6, t5, t4, t17, t3, t10, t11, t9, t8, t16, t2, t15, t14, t13, t7, t1
+			// t18, t12, t6, t5, t4, t17, t3, t11, t10, t9, t8, t16, t2, t15, t14, t13, t7, t1
 			Assert.AreEqual(teams[17], finalOrder[0]);
 			Assert.AreEqual(teams[5], finalOrder[2]);
 			Assert.AreEqual(teams[3], finalOrder[4]);
 
 			Assert.AreEqual(teams[2], finalOrder[6]);
-			Assert.AreEqual(teams[10], finalOrder[8]);
+			Assert.AreEqual(teams[9], finalOrder[8]);
 			Assert.AreEqual(teams[7], finalOrder[10]);
 
 			Assert.AreEqual(teams[1], finalOrder[12]);
@@ -51,7 +50,7 @@
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void CreateInitialBasketArgumentNullExceptionTest()
 		{
-			var alg = new PrimitiveAlgorithm(null);
+			var alg = new NonOrganizerAlgorithm(null);
 			alg.CreateInitialBasket();
 		}
 
@@ -59,7 +58,7 @@
 		[ExpectedException(typeof(InvalidDataException))]
 		public void CreateInitialBasketInvalidDataExceptionExceptionTest()
 		{
-			var alg = new PrimitiveAlgorithm(
+			var alg = new NonOrganizerAlgorithm(
 				new List<ITeam>
 				{
 					new Team("1", x => 1)

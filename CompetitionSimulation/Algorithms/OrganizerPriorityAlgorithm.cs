@@ -1,11 +1,11 @@
 ﻿namespace CompetitionSimulation.Algorithms
 {
 	using Baskets;
+	using CompetitionSimulation.Teams;
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
-	using CompetitionSimulation.Teams;
 
 	// TODO hodil by se asi mensi refactoring je to dost dlouhy a nekter veci se opakujou
 	/// <summary>
@@ -59,7 +59,7 @@
 			for (var b = 1; b <= this.BasketCount; b++)
 			{
 				output.Add(
-					new BasketSix(
+					new Basket135(
 						b.ToString(),
 						b,
 						1
@@ -118,7 +118,7 @@
 			for (var b = 1; b <= this.BasketCount; b++)
 			{
 				output.Add(
-					new BasketSix(
+					new Basket135(
 						b.ToString(),
 						b,
 						nextRound
@@ -206,7 +206,7 @@
 			for (var b = 1; b <= this.BasketCount; b++)
 			{
 				output.Add(
-					new BasketSix(
+					new Basket135(
 						b.ToString(),
 						b,
 						finalRound
