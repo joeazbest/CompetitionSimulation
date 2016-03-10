@@ -1,11 +1,11 @@
 ﻿namespace CompetitionSimulation
 {
 	using CompetitionSimulation.Algorithms;
+	using CompetitionSimulation.Teams;
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
-	using CompetitionSimulation.Teams;
 
 	public class Program
 	{
@@ -18,7 +18,7 @@
 			{
 				// seznam tymu
 				var teams = new Dictionary<double, ITeam>();
-				for (var teamOrder = 1; teamOrder <= 18; teamOrder++)
+				for (var teamOrder = 1; teamOrder <= 36; teamOrder++)
 				{
 					var value = teamOrder;  // predpokladam ze dve rnd cisla nebudou v 18ti cisle stejny :-)
 					teams.Add(
@@ -27,7 +27,7 @@
 					);
 				}
 
-				// pridam poradatelstvi
+				// pridam poradatelstvi - kazdemu jednou
 				var teamInput = teams.OrderBy(t => t.Key).Select(t => t.Value).ToList();
 				var order = 1;
 				var basket = 1;
@@ -36,6 +36,7 @@
 					output.Write("{0} ", team.Name);
 
 					team.AddOrganizer(new Organizer(order, basket.ToString()));
+					team.AddOrganizer(new Organizer(order + 6, basket.ToString()));
 					order++;
 					if (order == 7)
 					{
@@ -44,6 +45,7 @@
 					}
 				}
 				output.WriteLine();
+				output.Flush();
 
 				// projedu jednotlivy algoritmy
 				var alg1 = new NonOrganizerAlgorithm(teamInput);
@@ -52,7 +54,7 @@
 				var basket1First = alg1.CreateInitialBasket();
 				var basket2First = alg2.CreateInitialBasket();
 
-				for (var round = 1; round <= 5; round++)
+				for (var round = 1; round <= 11; round++)
 				{
 					var basket1Second = alg1.GetNextBasketComposition(basket1First);
 					var basket2Second = alg2.GetNextBasketComposition(basket2First);
