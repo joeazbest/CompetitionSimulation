@@ -143,50 +143,102 @@
 			var round5 = alg.GetNextBasketComposition(round4);
 			var round6 = alg.GetNextBasketComposition(round5);
 
-			var finalOrder = alg.GetTeamFinalOrder(round6);
+			var finalOrder6 = alg.GetTeamFinalOrder(round6);
 
 			// rucne spocitanej seznam pro danej primitini algorimus s timto poradim - beru vsechy ale poradi je trochu zadrhel je treba tomu trochu verit :-)
-			Assert.AreEqual("33", finalOrder[0].Name);
-			Assert.AreEqual("36", finalOrder[1].Name);
-			Assert.AreEqual("35", finalOrder[2].Name);
-			Assert.AreEqual("34", finalOrder[3].Name);
-			Assert.AreEqual("30", finalOrder[4].Name);
-			Assert.AreEqual("32", finalOrder[5].Name);
+			Assert.AreEqual("33", finalOrder6[0].Name);
+			Assert.AreEqual("36", finalOrder6[1].Name);
+			Assert.AreEqual("35", finalOrder6[2].Name);
+			Assert.AreEqual("34", finalOrder6[3].Name);
+			Assert.AreEqual("30", finalOrder6[4].Name);
+			Assert.AreEqual("32", finalOrder6[5].Name);
 
-			Assert.AreEqual("29", finalOrder[6].Name);
-			Assert.AreEqual("18", finalOrder[7].Name);
-			Assert.AreEqual("31", finalOrder[8].Name);
-			Assert.AreEqual("26", finalOrder[9].Name);
-			Assert.AreEqual("24", finalOrder[10].Name);
-			Assert.AreEqual("28", finalOrder[11].Name);
+			Assert.AreEqual("29", finalOrder6[6].Name);
+			Assert.AreEqual("18", finalOrder6[7].Name);
+			Assert.AreEqual("31", finalOrder6[8].Name);
+			Assert.AreEqual("26", finalOrder6[9].Name);
+			Assert.AreEqual("24", finalOrder6[10].Name);
+			Assert.AreEqual("28", finalOrder6[11].Name);
 
-			Assert.AreEqual("15", finalOrder[12].Name);
-			Assert.AreEqual("17", finalOrder[13].Name);
-			Assert.AreEqual("21", finalOrder[14].Name);
-			Assert.AreEqual("19", finalOrder[15].Name);
-			Assert.AreEqual("27", finalOrder[16].Name);
-			Assert.AreEqual("14", finalOrder[17].Name);
+			Assert.AreEqual("15", finalOrder6[12].Name);
+			Assert.AreEqual("17", finalOrder6[13].Name);
+			Assert.AreEqual("21", finalOrder6[14].Name);
+			Assert.AreEqual("19", finalOrder6[15].Name);
+			Assert.AreEqual("27", finalOrder6[16].Name);
+			Assert.AreEqual("14", finalOrder6[17].Name);
 
-			Assert.AreEqual("11", finalOrder[18].Name);
-			Assert.AreEqual("20", finalOrder[19].Name);
-			Assert.AreEqual("25", finalOrder[20].Name);
-			Assert.AreEqual("10", finalOrder[21].Name);
-			Assert.AreEqual("12", finalOrder[22].Name);
-			Assert.AreEqual("23", finalOrder[23].Name);
+			Assert.AreEqual("11", finalOrder6[18].Name);
+			Assert.AreEqual("20", finalOrder6[19].Name);
+			Assert.AreEqual("25", finalOrder6[20].Name);
+			Assert.AreEqual("10", finalOrder6[21].Name);
+			Assert.AreEqual("12", finalOrder6[22].Name);
+			Assert.AreEqual("23", finalOrder6[23].Name);
 
-			Assert.AreEqual("9", finalOrder[24].Name);
-			Assert.AreEqual("16", finalOrder[25].Name);
-			Assert.AreEqual("22", finalOrder[26].Name);
-			Assert.AreEqual("13", finalOrder[27].Name);
-			Assert.AreEqual("8", finalOrder[28].Name);
-			Assert.AreEqual("6", finalOrder[29].Name);
+			Assert.AreEqual("9", finalOrder6[24].Name);
+			Assert.AreEqual("16", finalOrder6[25].Name);
+			Assert.AreEqual("22", finalOrder6[26].Name);
+			Assert.AreEqual("13", finalOrder6[27].Name);
+			Assert.AreEqual("8", finalOrder6[28].Name);
+			Assert.AreEqual("6", finalOrder6[29].Name);
 
-			Assert.AreEqual("7", finalOrder[30].Name);
-			Assert.AreEqual("3", finalOrder[31].Name);
-			Assert.AreEqual("5", finalOrder[32].Name);
-			Assert.AreEqual("4", finalOrder[33].Name);
-			Assert.AreEqual("2", finalOrder[34].Name);
-			Assert.AreEqual("1", finalOrder[35].Name);
+			Assert.AreEqual("7", finalOrder6[30].Name);
+			Assert.AreEqual("3", finalOrder6[31].Name);
+			Assert.AreEqual("5", finalOrder6[32].Name);
+			Assert.AreEqual("4", finalOrder6[33].Name);
+			Assert.AreEqual("2", finalOrder6[34].Name);
+			Assert.AreEqual("1", finalOrder6[35].Name);
+
+			var round7 = alg.GetNextBasketComposition(round6);
+			var round8 = alg.GetNextBasketComposition(round7);
+			var round9 = alg.GetNextBasketComposition(round8);
+			var round10 = alg.GetNextBasketComposition(round9);
+			var round11 = alg.GetNextBasketComposition(round10);
+			var round12 = alg.GetNextBasketComposition(round11);
+
+			var finalOrder12 = alg.GetTeamFinalOrder(round12);
+
+			// rucne spocitanej seznam pro danej primitini algorimus s timto poradim - beru vsechy ale poradi je trochu zadrhel je treba tomu trochu verit :-)
+			Assert.AreEqual("33", finalOrder12[0].Name);
+			Assert.AreEqual("36", finalOrder12[1].Name);
+			Assert.AreEqual("35", finalOrder12[2].Name);
+			Assert.AreEqual("34", finalOrder12[3].Name);
+			Assert.AreEqual("32", finalOrder12[4].Name);
+			Assert.AreEqual("30", finalOrder12[5].Name);
+
+			Assert.AreEqual("29", finalOrder12[6].Name);
+			Assert.AreEqual("31", finalOrder12[7].Name);
+			Assert.AreEqual("28", finalOrder12[8].Name);
+			Assert.AreEqual("27", finalOrder12[9].Name);
+			Assert.AreEqual("26", finalOrder12[10].Name);
+			Assert.AreEqual("24", finalOrder12[11].Name);
+
+			Assert.AreEqual("17", finalOrder12[12].Name);
+			Assert.AreEqual("21", finalOrder12[13].Name);
+			Assert.AreEqual("25", finalOrder12[14].Name);
+			Assert.AreEqual("22", finalOrder12[15].Name);
+			Assert.AreEqual("23", finalOrder12[16].Name);
+			Assert.AreEqual("20", finalOrder12[17].Name);
+
+			Assert.AreEqual("13", finalOrder12[18].Name);
+			Assert.AreEqual("16", finalOrder12[19].Name);
+			Assert.AreEqual("19", finalOrder12[20].Name);
+			Assert.AreEqual("18", finalOrder12[21].Name);
+			Assert.AreEqual("15", finalOrder12[22].Name);
+			Assert.AreEqual("14", finalOrder12[23].Name);
+
+			Assert.AreEqual("9", finalOrder12[24].Name);
+			Assert.AreEqual("12", finalOrder12[25].Name);
+			Assert.AreEqual("11", finalOrder12[26].Name);
+			Assert.AreEqual("8", finalOrder12[27].Name);
+			Assert.AreEqual("10", finalOrder12[28].Name);
+			Assert.AreEqual("7", finalOrder12[29].Name);
+
+			Assert.AreEqual("6", finalOrder12[30].Name);
+			Assert.AreEqual("3", finalOrder12[31].Name);
+			Assert.AreEqual("5", finalOrder12[32].Name);
+			Assert.AreEqual("4", finalOrder12[33].Name);
+			Assert.AreEqual("2", finalOrder12[34].Name);
+			Assert.AreEqual("1", finalOrder12[35].Name);
 		}
 
 		private List<Organizer> AddOrganizer(

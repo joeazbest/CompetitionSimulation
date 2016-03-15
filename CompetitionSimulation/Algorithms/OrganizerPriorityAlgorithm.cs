@@ -150,7 +150,10 @@
 			{
 				if (!output[team.Value - 1].AddTeamFromTop(team.Key))
 				{
-					throw new NotSupportedException("tohle neresim zatim");
+					if (!output[team.Value].AddTeamFromTop(team.Key))
+					{
+						throw new NotSupportedException("Tohle resit nehodlam");
+					}
 				}
 			}
 
