@@ -122,6 +122,7 @@
 			output.Close();
 		}
 
+		// TODO rename
 		private static void FillLastVector(
 			int[] outputVector,
 			IList<ITeam> teamOutput
@@ -135,6 +136,7 @@
 			}
 		}
 
+		// TODO rename
 		private static double VectorDiff(
 			int[] vector1,
 			int[] vector2
@@ -150,7 +152,7 @@
 			for (var i = 0; i < vector1.Count(); i++)
 			{
 				var diff = vector1[i] - vector2[i];
-				output +=Math.Abs(diff * diff * diff);
+				output += Math.Pow(2, diff);
 			}
 			return Math.Sqrt(output);
 		}
