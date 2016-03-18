@@ -6,8 +6,21 @@
 	public class Team : ITeam
 	{
 		public string Name { get; }
+		public int OptimalOrder { get; }
 		private readonly Func<decimal, decimal> powerComputer;
 		private readonly List<Organizer> organizer;
+
+		public Team(
+			string name,
+			int optimalOrder,
+			Func<decimal, decimal> powerComputer
+		)
+		{
+			this.Name = name;
+			this.OptimalOrder = optimalOrder;
+			this.powerComputer = powerComputer;
+			this.organizer = new List<Organizer>();
+		}
 
 		public Team(
 			string name,
@@ -15,6 +28,7 @@
 		)
 		{
 			this.Name = name;
+			this.OptimalOrder = 0;
 			this.powerComputer = powerComputer;
 			this.organizer = new List<Organizer>();
 		}

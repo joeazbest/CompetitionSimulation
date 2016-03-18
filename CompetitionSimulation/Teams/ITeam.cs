@@ -5,6 +5,7 @@
 	public interface ITeam
 	{
 		string Name { get; }
+		int OptimalOrder { get; }
 
 		decimal GetCurrentPower(int round);
 
