@@ -51,6 +51,7 @@
     <Compile Include="Baskets\Basket.cs" />
     <Compile Include="Baskets\Basket145.cs" />
     <Compile Include="Algorithms\IAlgorithm.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Teams\Organizer.cs" />
     <Compile Include="Tables\TeamResult.cs" />
     <Compile Include="Tables\CompetitionTable.cs" />
