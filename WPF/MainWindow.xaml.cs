@@ -13,6 +13,15 @@
 		public MainWindow()
 		{
 			InitializeComponent();
+			for (var teamCount = 18; teamCount <= 36; teamCount = teamCount + 6)
+			{
+				TeamCount.Items.Add(teamCount);
+			}
+
+			for (var round = 6; round <= 18; round = round + 6)
+			{
+				RoundCount.Items.Add(round);
+			}
 
 			var points1 = new List<Tuple<double, double>>();
 			var points2 = new List<Tuple<double, double>>();
@@ -33,20 +42,11 @@
 			plotter.AddLineGraph(ds1, null, new CirclePointMarker { Size = 5, Fill = Brushes.Red }, null);
 			plotter.AddLineGraph(ds2, null, new CirclePointMarker { Size = 5, Fill = Brushes.Green }, null);
 			//plotter.AddLineGraph(ds, Colors.Green, 2, "Volts"); // to use this method you need "using Microsoft.Research.DynamicDataDisplay;"
-
-			//for (var teamCount = 18; teamCount <= 72; teamCount = teamCount + 6)
-			//{
-			//	TeamCount.Items.Add(teamCount);
-			//}
-
-			//for (var round = 6; round <= 18; round = round + 6)
-			//{
-			//	RoundCount.Items.Add(round);
-			//}
 		}
 
 		private void GenerateButtonClick(object sender, RoutedEventArgs e)
 		{
+			
 		}
 	}
 }
