@@ -23,8 +23,14 @@
 				RoundCount.Items.Add(round);
 			}
 
+			//plotter.AddLineGraph(ds, Colors.Green, 2, "Volts"); // to use this method you need "using Microsoft.Research.DynamicDataDisplay;"
+		}
+
+		private void GenerateButtonClick(object sender, RoutedEventArgs e)
+		{
 			var points1 = new List<Tuple<double, double>>();
 			var points2 = new List<Tuple<double, double>>();
+			var points3 = new List<Tuple<double, double>>();
 			for (int i = 0; i < 1000; i++)
 			{
 				points1.Add(new Tuple<double, double>(i * Math.PI / 50, Math.Cos(i * Math.PI / 50)));
@@ -41,12 +47,6 @@
 
 			plotter.AddLineGraph(ds1, null, new CirclePointMarker { Size = 5, Fill = Brushes.Red }, null);
 			plotter.AddLineGraph(ds2, null, new CirclePointMarker { Size = 5, Fill = Brushes.Green }, null);
-			//plotter.AddLineGraph(ds, Colors.Green, 2, "Volts"); // to use this method you need "using Microsoft.Research.DynamicDataDisplay;"
-		}
-
-		private void GenerateButtonClick(object sender, RoutedEventArgs e)
-		{
-			
 		}
 	}
 }
