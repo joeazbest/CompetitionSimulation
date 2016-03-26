@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompetitionSimulation", "Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompetitionSimulationTest", "CompetitionSimulationTest\CompetitionSimulationTest.csproj", "{82F0A2DA-AE86-4F0F-928F-8367107F7C2A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF", "WPF\WPF.csproj", "{02F808BF-5619-4D36-BA47-71E4E5577F3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{82F0A2DA-AE86-4F0F-928F-8367107F7C2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82F0A2DA-AE86-4F0F-928F-8367107F7C2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82F0A2DA-AE86-4F0F-928F-8367107F7C2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02F808BF-5619-4D36-BA47-71E4E5577F3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02F808BF-5619-4D36-BA47-71E4E5577F3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02F808BF-5619-4D36-BA47-71E4E5577F3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02F808BF-5619-4D36-BA47-71E4E5577F3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
